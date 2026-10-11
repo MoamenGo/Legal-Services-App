@@ -1,0 +1,6 @@
+# Local secrets for `next dev` and `wrangler dev`. Copy to .dev.vars (never commit it).
+# Production values are set with `wrangler secret put <NAME>`.
+NEXTJS_ENV=development
+JWT_ACCESS_SECRET=
+JWT_REFRESH_SECRET=
+TURNSTILE_SECRET_KEY=

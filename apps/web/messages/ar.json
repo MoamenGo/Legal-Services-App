@@ -1,0 +1,14 @@
+{
+  "meta": {
+    "title": "استشارات قانونية | [CLIENT TO PROVIDE]",
+    "description": "اطلب استشارة قانونية مع محامٍ مرخّص. [CLIENT TO PROVIDE]"
+  },
+  "home": {
+    "firmName": "[CLIENT TO PROVIDE: اسم المكتب]",
+    "switchLanguage": "English",
+    "headline": "استشارة قانونية واضحة لقضيتك",
+    "subheadline": "تواصل معنا وسيتصل بك محامٍ لمناقشة وضعك القانوني.",
+    "ctaConsultation": "اطلب استشارة",
+    "templateNotice": "هذه نسخة تجريبية من القالب، والمحتوى النهائي يقدّمه العميل."
+  }
+}
