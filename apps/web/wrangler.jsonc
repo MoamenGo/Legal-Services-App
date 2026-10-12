@@ -10,7 +10,7 @@
   },
   "observability": { "enabled": true },
   "vars": {
-    "NEXT_PUBLIC_SITE_URL": "https://legal-services-app.workers.dev",
+    "NEXT_PUBLIC_SITE_URL": "https://legal-services-app.abdelmoamengomaa98.workers.dev",
     "NEXT_PUBLIC_DEFAULT_LOCALE": "ar",
   },
   "d1_databases": [
