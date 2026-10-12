@@ -1,0 +1,14 @@
+{
+  "meta": {
+    "title": "Legal consultation | [CLIENT TO PROVIDE]",
+    "description": "Request a legal consultation with a licensed lawyer. [CLIENT TO PROVIDE]"
+  },
+  "home": {
+    "firmName": "[CLIENT TO PROVIDE: firm name]",
+    "switchLanguage": "العربية",
+    "headline": "Clear legal advice for your case",
+    "subheadline": "Get in touch and a lawyer will call you to discuss your situation.",
+    "ctaConsultation": "Request a consultation",
+    "templateNotice": "This is a template preview; final content comes from the client."
+  }
+}

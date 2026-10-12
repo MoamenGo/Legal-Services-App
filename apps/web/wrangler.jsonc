@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "legal-services-app",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+  },
+  "observability": { "enabled": true },
+  "vars": {
+    "NEXT_PUBLIC_SITE_URL": "https://legal-services-app.workers.dev",
+    "NEXT_PUBLIC_DEFAULT_LOCALE": "ar",
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "legal-services-db",
+      "database_id": "881968c6-7c81-41ab-a95a-5f214b538012",
+      "migrations_dir": "migrations",
+    },
+  ],
+}

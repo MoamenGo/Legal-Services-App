@@ -1,0 +1,8 @@
+pnpm-lock.yaml
+.next
+.open-next
+.wrangler
+apps/web/migrations
+AGENTS.md
+next-env.d.ts
+cloudflare-env.d.ts

@@ -1,0 +1,12 @@
+packages:
+  - apps/*
+  - packages/*
+
+# Native binaries that wrangler, esbuild and Next need at install time.
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@swc/core'
+  - esbuild
+  - sharp
+  - unrs-resolver
+  - workerd
