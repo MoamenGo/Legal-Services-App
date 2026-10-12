@@ -17,8 +17,7 @@
     {
       "binding": "DB",
       "database_name": "legal-services-db",
-      // Replace with the id printed by `wrangler d1 create legal-services-db`.
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "881968c6-7c81-41ab-a95a-5f214b538012",
       "migrations_dir": "migrations",
     },
   ],

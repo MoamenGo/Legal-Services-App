@@ -12,7 +12,8 @@ Until the two repo secrets below exist, the deploy job skips with a notice and C
    - Account · Workers R2 Storage · Edit (needed once media uploads land)
 3. In GitHub → Settings → Secrets and variables → Actions, add `CLOUDFLARE_API_TOKEN` and
    `CLOUDFLARE_ACCOUNT_ID`.
-4. Create the database and put its id in `apps/web/wrangler.jsonc` (`database_id`):
+4. Create the database and put its id in `apps/web/wrangler.jsonc` (`database_id`). For this
+   repo it is already set; a new copy of the template needs its own:
 
    ```sh
    cd apps/web
