@@ -16,9 +16,11 @@ export const plexArabic = IBM_Plex_Sans_Arabic({
 export const reemKufi = Reem_Kufi({
   subsets: ['arabic', 'latin'],
   weight: 'variable',
-  // The hero headline is the LCP element, so its face must never swap in late: preloaded, and
-  // `optional` keeps the fallback for that visit when the font is slow (cached for the next one).
+  // The hero headline is the LCP element, so its face must never swap in late: `optional` keeps
+  // the fallback for that page view when the font is not ready, and the font is cached for the
+  // next one. Not preloaded: on slow 4G the 32 KB preload competed with the CSS and pushed LCP
+  // past 2.5 s on the live Lighthouse runs.
   display: 'optional',
-  preload: true,
+  preload: false,
   variable: '--font-reem-kufi',
 });

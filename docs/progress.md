@@ -161,3 +161,9 @@ pnpm preview`, open `/ar/lp/labor-lawyer` at 360px and submit the form (needs in
   amendment). Every other budget, including LCP and CLS on `/ar`, `/en` and the landing page,
   passed on the redesigned site.
 - Verify: Actions → Lighthouse after the deploy.
+
+## 2026-10-13: Heading font no longer preloaded
+
+- What: a live Lighthouse run measured LCP at 2.5-3.6 s on `/en` and the landing page. The 32 KB
+  Reem Kufi preload competed with the CSS on slow 4G, so it is no longer preloaded (ADR 0008).
+- Verify: Actions → Lighthouse after the deploy.
