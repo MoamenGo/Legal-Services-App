@@ -108,3 +108,19 @@ pnpm preview`, open `/ar/lp/labor-lawyer` at 360px and submit the form (needs in
 - Verify: `pnpm test` (retention, anonymize route, redirect map, headers), then
   `cd apps/web && pnpm db:migrate:local && pnpm preview` and `curl -I http://localhost:8787/ar`.
   Pages, the lead form and `/admin` load with no CSP errors in the browser console.
+
+## 2026-10-13: Playwright end-to-end suite
+
+- What: `apps/web/e2e` covers the five flows in AGENTS.md section 11: landing page form to
+  thank-you with `generate_lead` and the ad attribution; staff open that lead, see its gclid and
+  campaign, and qualifying it queues the Google Ads conversion; call and WhatsApp buttons push
+  their events; Arabic pages are RTL with no sideways scroll at 360, 768 and 1280 px; consent
+  starts denied and only the visitor's choice grants it. A new `E2E` workflow runs them on every
+  pull request against the built Worker with fake seed data. New dev dependency:
+  `@playwright/test` (AGENTS.md section 2 names Playwright for E2E).
+- Choices: the Turnstile widget is replaced by a stub that returns Cloudflare's dummy token, but
+  the API still verifies it with Turnstile's test secret, so the server check runs for real. The
+  RTL flow asserts direction and overflow and attaches screenshots to the report instead of
+  comparing pixel baselines, which differ between machines with fonts and anti-aliasing.
+- Verify: `cd apps/web && pnpm e2e:prepare && pnpm e2e` (needs internet for the captcha check;
+  `PLAYWRIGHT_CHROMIUM_PATH` points at a system Chromium if Playwright's own is not installed).

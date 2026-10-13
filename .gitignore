@@ -16,3 +16,5 @@ coverage
 cloudflare-env.d.ts
 next-env.d.ts
 .content
+test-results
+playwright-report
