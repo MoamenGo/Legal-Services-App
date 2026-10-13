@@ -1,16 +1,6 @@
 import { z } from 'zod';
+import { caseTypes, locales, preferredContacts } from './constants';
 import { normalizeSaudiPhone } from './phone';
-
-export const caseTypes = [
-  'family',
-  'labor',
-  'commercial',
-  'criminal',
-  'real_estate',
-  'other',
-] as const;
-export const preferredContacts = ['call', 'whatsapp', 'email'] as const;
-export const locales = ['ar', 'en'] as const;
 
 const utm = z.string().trim().max(200).optional();
 
