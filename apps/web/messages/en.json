@@ -218,7 +218,11 @@
     "metaDescription": "Articles on legal topics from the firm's lawyers.",
     "title": "Articles",
     "intro": "Practical legal articles written by the firm's lawyers.",
-    "empty": "No articles yet. They will appear here once the firm publishes them."
+    "empty": "No articles yet. They will appear here once the firm publishes them.",
+    "readMore": "Read article",
+    "published": "Published {date}",
+    "back": "All articles",
+    "disclaimer": "This article is general information, not legal advice for your situation."
   },
   "contact": {
     "metaTitle": "Contact us | [CLIENT TO PROVIDE: firm name]",
@@ -384,7 +388,9 @@
       "logout": "Sign out",
       "language": "العربية",
       "skipToContent": "Skip to content",
-      "reports": "Reports"
+      "reports": "Reports",
+      "articles": "Articles",
+      "settings": "Settings"
     },
     "login": {
       "heading": "Sign in",
@@ -530,6 +536,58 @@
       },
       "total": "Total",
       "empty": "No data for this period."
+    },
+    "articles": {
+      "heading": "Articles",
+      "new": "New article",
+      "empty": "No articles yet.",
+      "published": "Published",
+      "draft": "Draft",
+      "updated": "Last edited",
+      "readOnly": "You can read articles only."
+    },
+    "article": {
+      "newHeading": "New article",
+      "editHeading": "Edit article",
+      "back": "Back to articles",
+      "slug": "URL slug",
+      "slugHint": "Lowercase letters, digits and hyphens, e.g. end-of-service-award",
+      "arabic": "Arabic",
+      "english": "English (optional)",
+      "englishHint": "Without an English title and text the article appears on the Arabic site only.",
+      "title": "Title",
+      "summary": "Short summary (shown in the list and search results)",
+      "body": "Text",
+      "bodyHint": "Leave a blank line between paragraphs. Start a line with ## for a heading and - for a list item.",
+      "tags": "Tags (comma-separated)",
+      "publishedLabel": "Published on the site",
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "Saved. Press \"Publish changes\" to update the site.",
+      "delete": "Delete article",
+      "confirmDelete": "Delete this article permanently?",
+      "slugTaken": "Another article uses this slug.",
+      "notFound": "Article not found."
+    },
+    "settings": {
+      "heading": "Firm details",
+      "intro": "Shown on the site (contact page and the mobile bottom bar). Leave a field empty if it is not available yet.",
+      "phone": "Phone",
+      "whatsapp": "WhatsApp number",
+      "email": "Email",
+      "addressAr": "Address in Arabic",
+      "addressEn": "Address in English",
+      "hoursAr": "Office hours in Arabic",
+      "hoursEn": "Office hours in English",
+      "phoneHint": "Saudi mobile, e.g. 05XXXXXXXX",
+      "save": "Save",
+      "saved": "Saved. Press \"Publish changes\" to update the site."
+    },
+    "publish": {
+      "button": "Publish changes",
+      "started": "Publishing started. The site updates in 3 to 5 minutes.",
+      "notConfigured": "One-click publishing is not set up yet. Changes appear with the next deploy (see the runbook).",
+      "failed": "Could not start publishing. Try again shortly."
     }
   },
   "emails": {

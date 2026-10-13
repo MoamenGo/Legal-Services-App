@@ -18,7 +18,8 @@
     "db:migrate:local": "wrangler d1 migrations apply DB --local",
     "db:migrate:remote": "wrangler d1 migrations apply DB --remote",
     "seed": "node --experimental-strip-types scripts/seed.ts",
-    "admin:sql": "node --experimental-strip-types scripts/admin-sql.ts"
+    "admin:sql": "node --experimental-strip-types scripts/admin-sql.ts",
+    "content:export": "node --experimental-strip-types scripts/export-content.ts"
   },
   "dependencies": {
     "@app/schemas": "workspace:*",

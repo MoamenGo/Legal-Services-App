@@ -1,11 +1,15 @@
 import type { UserRole } from '@/server/db/schema';
 import type { JobsEnv } from '@/server/jobs/env';
+import type { PublishEnv } from './modules/publish/service';
 
 export type AuthUser = { id: string; role: UserRole; name: string };
 
 export type ApiEnv = {
   Bindings: Pick<CloudflareEnv, 'DB' | 'LEAD_RATE_LIMITER' | 'AUTH_RATE_LIMITER'> &
-    Omit<JobsEnv, 'DB'> & {
+    Omit<JobsEnv, 'DB'> &
+    PublishEnv & {
+      /** Shared secret for POST /api/webhooks/revalidate. */
+      REVALIDATE_SECRET?: string;
       /** Secret set with `wrangler secret put`; absent while the template uses Turnstile test keys. */
       TURNSTILE_SECRET_KEY?: string;
       /** Signs 15-minute admin access tokens. The deploy workflow creates it if missing. */

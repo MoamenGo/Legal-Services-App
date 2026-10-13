@@ -15,6 +15,8 @@
     "NEXT_PUBLIC_SITE_URL": "https://legal-services-app.abdelmoamengomaa98.workers.dev",
     "NEXT_PUBLIC_DEFAULT_LOCALE": "ar",
     "INTAKE_LANGUAGE": "ar",
+    // Repository the admin "Publish changes" button rebuilds (needs the GITHUB_DEPLOY_TOKEN secret).
+    "GITHUB_REPOSITORY": "MoamenGo/Legal-Services-App",
   },
   // POST /api/leads: 5 requests a minute per IP (AGENTS.md section 5).
   "ratelimits": [

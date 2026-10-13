@@ -78,3 +78,19 @@ pnpm preview`, open `/ar/lp/labor-lawyer` at 360px and submit the form (needs in
 - Verify: `pnpm test`, then preview and open `/ar/lp/labor-lawyer?gclid=TEST`: the banner shows,
   `dataLayer[0]` is the denied consent default, and the `lsa_attr` cookie holds the gclid. Sign in
   to `/admin` and open Reports.
+
+## 2026-10-13: Phase 4b articles, firm settings and publishing
+
+- What: `articles` and `settings` tables with admin API and screens (Articles list and editor in
+  Arabic and optional English, Settings for phone, WhatsApp, email, address and hours, Publish
+  button). Public `/[locale]/articles` and article pages with Article and BreadcrumbList JSON-LD,
+  in the sitemap. The contact page, footer, sticky bar and LegalService JSON-LD use the Settings
+  values. The Deploy workflow exports published content from D1 before building; Publish starts
+  that workflow (also `POST /api/webhooks/revalidate`). OpenNext now serves prerendered pages
+  from static assets instead of rendering each request. Shared zod schemas in
+  `packages/schemas/src/content.ts`. ADR 0005.
+- Why: AGENTS.md sections 5 and 12 (CMS, settings, revalidation) within the free plan.
+- Verify: `pnpm test`, then `cd apps/web && pnpm seed && pnpm content:export --local && pnpm preview`,
+  open `/ar/articles/sample-article` and `/ar/contact`, and edit both in `/admin`.
+- Not yet: editing services and landing pages in the dashboard (they stay in code), media uploads
+  (R2 needs a card on file).
