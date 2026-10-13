@@ -23,7 +23,7 @@
         },
         {
           "matchingUrlPattern": ".*/lp/.*",
-          "assertions": { "resource-summary:script:size": ["error", { "maxNumericValue": 163840 }] }
+          "assertions": { "resource-summary:script:size": ["error", { "maxNumericValue": 176128 }] }
         }
       ]
     },

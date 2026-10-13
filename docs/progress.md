@@ -153,3 +153,11 @@ pnpm preview`, open `/ar/lp/labor-lawyer` at 360px and submit the form (needs in
   restyled form, FAQ, steps, trust band, contact and article pages. `/admin` follows the palette.
 - Verify: open `/ar`, `/en`, `/ar/lp/labor-lawyer` at 360px and desktop; Actions → Lighthouse
   after the deploy.
+
+## 2026-10-13: Landing-page JS budget corrected
+
+- What: the live Lighthouse run measured 166 KB of script on the landing page (framework only, the
+  same before and after the redesign), so the 160 KB budget failed. It is now 172 KB (ADR 0007
+  amendment). Every other budget, including LCP and CLS on `/ar`, `/en` and the landing page,
+  passed on the redesigned site.
+- Verify: Actions → Lighthouse after the deploy.

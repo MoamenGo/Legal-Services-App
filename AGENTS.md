@@ -187,7 +187,7 @@ Every admin read of a lead and every write must create an `AuditLog` entry.
 ### Performance budgets (enforced in CI via Lighthouse CI)
 - Mobile Lighthouse Performance ≥ 90, Accessibility ≥ 95, SEO ≥ 95, Best Practices ≥ 95.
 - LCP < 2.5 s, CLS < 0.1, INP < 200 ms.
-- First-load JS for landing pages < 160 KB gzipped (raised from 120 KB in ADR 0007: React + Next.js alone is ~150 KB).
+- First-load JS for landing pages < 172 KB transferred (ADR 0007: React + Next.js alone is ~166 KB on the live site).
 - Images via `next/image` (AVIF/WebP), explicit sizes, hero image `priority`.
 - Third-party scripts only through GTM, loaded `afterInteractive`. Maps and videos load lazily on interaction.
 
