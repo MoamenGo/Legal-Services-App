@@ -139,3 +139,9 @@ pnpm preview`, open `/ar/lp/labor-lawyer` at 360px and submit the form (needs in
   Landing-page JavaScript is about 155 KB compressed against the 120 KB budget, almost all of it
   React and Next.js itself; the check reports it as a warning until the budget is revisited.
 - Verify: Actions → Lighthouse after a deploy, or run it by hand with **Run workflow**.
+
+## 2026-10-13: Landing-page JS budget
+
+- What: the landing-page JavaScript budget is 160 KB (ADR 0007), up from 120 KB, because React and
+  Next.js alone are about 150 KB. Lighthouse CI now fails, rather than warns, above it.
+- Verify: Actions → Lighthouse after the deploy.
