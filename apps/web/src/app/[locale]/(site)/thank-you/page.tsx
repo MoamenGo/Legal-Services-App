@@ -29,12 +29,12 @@ export default async function ThankYouPage({ params }: PageProps<'/[locale]/than
       <div className="mx-auto max-w-xl py-8 text-center">
         <div
           aria-hidden
-          className="mx-auto flex size-14 items-center justify-center rounded-full bg-green-100 text-2xl text-green-700"
+          className="mx-auto flex size-16 items-center justify-center rounded-full bg-brand-900 text-3xl text-saffron-400"
         >
           ✓
         </div>
-        <h1 className="mt-4 text-3xl font-bold text-brand-900">{t('title')}</h1>
-        <p className="mt-3 text-lg text-slate-600">{t('body')}</p>
+        <h1 className="mt-6 font-display text-4xl font-semibold text-brand-900">{t('title')}</h1>
+        <p className="mt-4 text-lg text-muted">{t('body')}</p>
         <Link href="/" className={`${buttonClass.secondary} mt-8`}>
           {t('backHome')}
         </Link>

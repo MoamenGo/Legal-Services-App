@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/components/LocalLink';
-import { Card, Section } from '@/components/ui';
+import { PageTitle, Section } from '@/components/ui';
 import { articlesFor, localized } from '@/content/cms';
 import { resolveLocale } from '@/lib/locale';
 import { pageMetadata } from '@/lib/seo';
@@ -30,27 +30,27 @@ export default async function ArticlesPage({ params }: PageProps<'/[locale]/arti
   });
   return (
     <Section>
-      <h1 className="text-3xl font-bold text-brand-900">{t('title')}</h1>
-      <p className="mt-2 max-w-2xl text-slate-600">{t('intro')}</p>
+      <PageTitle title={t('title')} intro={t('intro')} />
       {items.length === 0 ? (
-        <p className="mt-8 rounded-xl border border-dashed border-slate-300 p-6 text-slate-500">
+        <p className="mt-12 rounded-2xl border border-dashed border-line bg-gypsum p-6 text-muted">
           {t('empty')}
         </p>
       ) : (
-        <ul className="mt-8 grid gap-4 md:grid-cols-2">
+        <ul className="mt-12 grid gap-x-10 border-t border-line md:grid-cols-2">
           {items.map((article) => (
-            <li key={article.slug}>
-              <Card className="h-full">
-                <p className="text-sm text-slate-500">
-                  {t('published', { date: date.format(new Date(article.publishedAt)) })}
-                </p>
-                <h2 className="mt-1 text-xl font-bold text-brand-900">
-                  <Link href={`/articles/${article.slug}`} className="hover:underline">
-                    {localized(article.title, locale)}
-                  </Link>
-                </h2>
-                <p className="mt-2 text-slate-600">{localized(article.summary, locale)}</p>
-              </Card>
+            <li key={article.slug} className="border-b border-line py-7">
+              <p className="text-sm text-muted">
+                {t('published', { date: date.format(new Date(article.publishedAt)) })}
+              </p>
+              <h2 className="mt-2 font-display text-2xl font-semibold text-brand-900">
+                <Link
+                  href={`/articles/${article.slug}`}
+                  className="underline-offset-8 hover:underline"
+                >
+                  {localized(article.title, locale)}
+                </Link>
+              </h2>
+              <p className="mt-2 text-muted">{localized(article.summary, locale)}</p>
             </li>
           ))}
         </ul>

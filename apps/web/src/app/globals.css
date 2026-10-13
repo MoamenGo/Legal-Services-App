@@ -1,11 +1,29 @@
 @import 'tailwindcss';
 
+/*
+ * Visual identity (docs/decisions/0008-visual-identity.md): pine ink and gypsum from Riyadh's
+ * old town, saffron from painted Najdi doors, and a crenellated frieze taken from the parapets of
+ * Diriyah. The brand-* names are kept so /admin follows the same palette.
+ */
 @theme {
   --font-sans: var(--font-plex-arabic), ui-sans-serif, system-ui, sans-serif;
-  --color-brand-900: #10243e;
-  --color-brand-50: #eef3f9;
-  --color-brand-700: #1d3d66;
-  --color-accent-500: #b8893b;
+  --font-display: var(--font-reem-kufi), var(--font-plex-arabic), ui-sans-serif, sans-serif;
+
+  --color-brand-950: #0c2824;
+  --color-brand-900: #133b35;
+  --color-brand-700: #1e5148;
+  --color-brand-100: #dce6e2;
+  --color-brand-50: #eef2ef;
+
+  --color-ink: #1c2a27;
+  --color-muted: #52625e;
+  --color-line: #d5ddd9;
+  --color-gypsum: #f2f4f1;
+
+  /* 400 is for text and marks on pine; 600 passes 4.5:1 on white for focus rings and fine lines. */
+  --color-saffron-400: #e0ad4a;
+  --color-saffron-600: #946412;
+  --color-accent-500: #946412;
 }
 
 html {
@@ -13,7 +31,61 @@ html {
 }
 
 body {
-  @apply bg-white text-slate-900 antialiased;
+  @apply bg-white text-ink antialiased;
+}
+
+:where(a, button, summary, input, select, textarea):focus-visible {
+  outline: 3px solid var(--color-saffron-600);
+  outline-offset: 2px;
+}
+.on-pine :where(a, button, summary):focus-visible {
+  outline-color: var(--color-saffron-400);
+}
+
+/* Arabic needs more room between lines than Latin; the display face is set tighter. */
+:lang(ar) body {
+  line-height: 1.8;
+}
+.font-display {
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+/* Reem Kufi's Latin spaces words tightly; open it up for English headings only. */
+:lang(en) .font-display {
+  word-spacing: 0.12em;
+}
+
+/*
+ * The Najdi parapet: a row of triangles along the top edge of a pine block, like the crenellated
+ * walls of At-Turaif. Drawn with a mask, so it costs no image and inherits the block's colour.
+ */
+.najdi-top {
+  --tooth: 1.5rem;
+  position: relative;
+  margin-top: calc(var(--tooth) * 0.75);
+}
+.najdi-top::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 100%;
+  height: calc(var(--tooth) * 0.75);
+  background: inherit;
+  /* Tile is 1 wide by 0.75 high, so each side of the tooth sits 33.7deg off vertical. */
+  mask: conic-gradient(from 146.3deg at 50% 0, #000 67.4deg, #0000 0) 50% 0 / var(--tooth) 100%
+    repeat-x;
+}
+@media (min-width: 64rem) {
+  .najdi-top {
+    --tooth: 2.25rem;
+  }
+}
+
+/* The small triangular openings that sit under a Najdi parapet; used once, as a divider. */
+.najdi-vents {
+  height: 0.625rem;
+  background: conic-gradient(from -30deg at 50% 100%, currentColor 60deg, #0000 0) 50% 0 / 1.75rem
+    100% repeat-x;
 }
 
 /* Shown only while the visitor has not chosen; see consentDefaultScript in src/lib/consent.ts. */

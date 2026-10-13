@@ -66,9 +66,12 @@ export async function ConsultationCard({
   variant?: 'short' | 'full';
 }) {
   return (
-    <Card id="consultation" className="scroll-mt-24 p-5 sm:p-6">
-      <h2 className="text-xl font-bold text-brand-900">{title}</h2>
-      {intro && <p className="mt-1 text-slate-600">{intro}</p>}
+    <Card
+      id="consultation"
+      className="scroll-mt-24 border-t-4 border-t-saffron-400 p-5 text-ink shadow-[0_24px_48px_-24px_rgb(12_40_36/0.55)] sm:p-7"
+    >
+      <h2 className="font-display text-2xl font-semibold text-brand-900">{title}</h2>
+      {intro && <p className="mt-1 text-muted">{intro}</p>}
       <div className="mt-4">
         <ConsultationForm
           locale={(await getLocale()) as Locale}

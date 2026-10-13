@@ -49,7 +49,7 @@ export type ConsultationFormLabels = {
 const emptyToUndefined = (value: unknown) => (value === '' ? undefined : value);
 
 const inputClass =
-  'block min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-base text-slate-900 placeholder:text-slate-400 focus:border-brand-700 focus:outline-2 focus:outline-brand-700 aria-invalid:border-red-600';
+  'block min-h-12 w-full rounded-xl border border-line bg-gypsum px-3.5 py-2 text-base text-ink placeholder:text-muted/70 focus:border-brand-900 focus:bg-white aria-invalid:border-red-600';
 
 type Props = {
   locale: Locale;
@@ -240,7 +240,7 @@ export function ConsultationForm({
               {preferredContacts.map((method) => (
                 <label
                   key={method}
-                  className="flex min-h-11 cursor-pointer items-center gap-2 rounded-lg border border-slate-300 px-3 has-checked:border-brand-700 has-checked:bg-brand-50"
+                  className="flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line px-4 has-checked:border-brand-900 has-checked:bg-brand-50"
                 >
                   <input
                     type="radio"
@@ -289,7 +289,7 @@ export function ConsultationForm({
       </div>
 
       {variant === 'full' && (
-        <label className="flex min-h-11 items-start gap-3 text-slate-600">
+        <label className="flex min-h-11 items-start gap-3 text-muted">
           <input
             type="checkbox"
             {...register('marketingConsent')}
@@ -310,7 +310,7 @@ export function ConsultationForm({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="flex min-h-12 w-full items-center justify-center rounded-lg bg-brand-900 px-5 py-3 text-base font-bold text-white hover:bg-brand-700 disabled:opacity-60"
+        className="flex min-h-13 w-full items-center justify-center rounded-full bg-brand-900 px-5 py-3 text-lg font-bold text-white hover:bg-brand-700 disabled:opacity-60"
       >
         {isSubmitting ? labels.submitting : labels.submit}
       </button>

@@ -7,9 +7,9 @@ export default async function NotFound() {
   return (
     <Section>
       <div className="mx-auto max-w-xl py-8 text-center">
-        <p className="text-5xl font-bold text-accent-500">404</p>
-        <h1 className="mt-4 text-3xl font-bold text-brand-900">{t('title')}</h1>
-        <p className="mt-3 text-slate-600">{t('body')}</p>
+        <p className="font-display text-7xl font-semibold text-saffron-600">404</p>
+        <h1 className="mt-4 font-display text-3xl font-semibold text-brand-900">{t('title')}</h1>
+        <p className="mt-3 text-muted">{t('body')}</p>
         <Link href="/" className={`${buttonClass.secondary} mt-8`}>
           {t('backHome')}
         </Link>
