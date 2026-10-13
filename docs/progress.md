@@ -62,3 +62,19 @@ pnpm preview`, open `/ar/lp/labor-lawyer` at 360px and submit the form (needs in
   `cd apps/web && pnpm build:worker && npx wrangler dev --test-scheduled` and open
   `/__scheduled?cron=*/10+*+*+*+*`. Setup per channel: `docs/runbooks/integrations.md`.
 - Not yet: SMS (needs the firm to pick Unifonic or Taqnyat), Sentry alerting.
+
+## 2026-10-13: Phase 4a tracking and funnel report
+
+- What: GTM loads only when the `NEXT_PUBLIC_GTM_ID` repository variable is set, after an inline
+  Consent Mode v2 default (denied, or the saved choice). Bilingual consent banner with equal
+  Accept and Essential-only buttons, reopened from the footer. First-party `lsa_attr` cookie
+  (90 days, first and last touch) feeds the lead form, so a gclid survives later direct visits.
+  `click_to_call` and `whatsapp_click` are pushed from any `[data-event]` link. Enhanced
+  Conversions: hashed email and phone on `generate_lead`, only with consent. Funnel report at
+  `/admin/reports` (by campaign, keyword or landing page) and `GET /api/admin/reports/funnel`.
+  `docs/tracking-plan.md` documents every event, tag, trigger and variable; the importable
+  container is `docs/gtm-container.json`. The privacy policy has a cookies section.
+- Why: AGENTS.md section 8 and the funnel report in section 5.
+- Verify: `pnpm test`, then preview and open `/ar/lp/labor-lawyer?gclid=TEST`: the banner shows,
+  `dataLayer[0]` is the denied consent default, and the `lsa_attr` cookie holds the gclid. Sign in
+  to `/admin` and open Reports.

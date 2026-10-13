@@ -26,6 +26,8 @@ jobs:
       # Repo variable (Settings > Secrets and variables > Actions > Variables). Empty keeps the
       # Turnstile test key, which accepts every visitor; set the firm's key before real traffic.
       NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
+      # Repo variable too. Empty: no tags load until the firm creates its GTM container.
+      NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
       # Only whether the secrets exist; the values go to the one step that needs them.
       HAS_ADMIN_SECRETS: ${{ secrets.ADMIN_EMAIL != '' && secrets.ADMIN_PASSWORD != '' }}
     steps:

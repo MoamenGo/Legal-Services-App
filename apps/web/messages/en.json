@@ -254,6 +254,13 @@
         ]
       },
       {
+        "title": "Cookies",
+        "body": [
+          "We use our own 90-day cookie that remembers how you reached the site (for example an ad campaign) so it can be attached to your request if you send one. It is not shared with anyone.",
+          "Google measurement and advertising tools run only after you consent, and you can change your choice at any time from the \"Cookie settings\" link at the bottom of the page."
+        ]
+      },
+      {
         "title": "How long we keep it",
         "body": [
           "Requests are kept for up to 24 months, after which personal details are deleted or anonymised, unless the law requires longer."
@@ -376,7 +383,8 @@
       "users": "Users",
       "logout": "Sign out",
       "language": "العربية",
-      "skipToContent": "Skip to content"
+      "skipToContent": "Skip to content",
+      "reports": "Reports"
     },
     "login": {
       "heading": "Sign in",
@@ -499,6 +507,29 @@
         "skipped": "Not set up",
         "failed": "Failed"
       }
+    },
+    "reports": {
+      "heading": "Lead funnel",
+      "intro": "How many leads each campaign brought and how far they got. Each column includes leads that went further.",
+      "groupBy": "Group by",
+      "groups": {
+        "campaign": "Campaign",
+        "term": "Keyword",
+        "landingPage": "Landing page"
+      },
+      "none": "(none)",
+      "columns": {
+        "leads": "Leads",
+        "contacted": "Contacted",
+        "qualified": "Qualified",
+        "booked": "Booked",
+        "retained": "Retained",
+        "spam": "Spam",
+        "rate": "Retained rate",
+        "value": "Retained value (SAR)"
+      },
+      "total": "Total",
+      "empty": "No data for this period."
     }
   },
   "emails": {
@@ -513,5 +544,13 @@
     "intakeLink": "Open it in the dashboard:",
     "clientSubject": "We received your consultation request",
     "clientBody": "Hello {name},\n\nThank you for contacting {firm}. We received your consultation request and a member of our team will contact you as soon as possible during working hours.\n\nThis is an automatic message and is not legal advice.\n\n{firm}"
+  },
+  "consent": {
+    "title": "Cookies",
+    "body": "We use essential cookies to run this site. With your consent we also use Google tools to measure visits and ad performance. You can change your choice at any time from the bottom of the page.",
+    "accept": "Accept",
+    "reject": "Essential only",
+    "privacy": "Privacy policy",
+    "settings": "Cookie settings"
   }
 }

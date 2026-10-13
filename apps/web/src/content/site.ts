@@ -14,5 +14,7 @@ export const site = {
   whatsapp: null as string | null,
   /** [CLIENT TO PROVIDE] */
   email: null as string | null,
+  /** GTM container id (GTM-XXXXXXX). Without it no tag loads; the consent banner still works. */
+  gtmId: process.env.NEXT_PUBLIC_GTM_ID || null,
   turnstileSiteKey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || TURNSTILE_TEST_SITE_KEY,
 };

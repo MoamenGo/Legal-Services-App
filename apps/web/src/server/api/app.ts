@@ -4,6 +4,7 @@ import type { ApiEnv } from './env';
 import { adminLeadsRoutes } from './modules/admin-leads/routes';
 import { authRoutes } from './modules/auth/routes';
 import { leadsRoutes } from './modules/leads/routes';
+import { reportsRoutes } from './modules/reports/routes';
 import { usersRoutes } from './modules/users/routes';
 
 export type { ApiEnv } from './env';
@@ -24,6 +25,7 @@ api.route('/', leadsRoutes);
 api.route('/', authRoutes);
 api.route('/', adminLeadsRoutes);
 api.route('/', usersRoutes);
+api.route('/', reportsRoutes);
 
 api.notFound((c) => apiError(c, 404, 'not_found', 'Route not found'));
 
