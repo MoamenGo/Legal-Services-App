@@ -20,6 +20,12 @@
       "namespace_id": "1001",
       "simple": { "limit": 5, "period": 60 },
     },
+    // /api/auth/*: stricter than general traffic, on top of the 5-failure account lockout.
+    {
+      "name": "AUTH_RATE_LIMITER",
+      "namespace_id": "1002",
+      "simple": { "limit": 10, "period": 60 },
+    },
   ],
   "d1_databases": [
     {
