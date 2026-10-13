@@ -29,7 +29,13 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
   const tc = await getTranslations('consent');
 
   return (
-    <html lang={locale} dir={directionOf(locale)} className={plexArabic.variable}>
+    // The inline consent script sets data-consent on <html> before React hydrates.
+    <html
+      lang={locale}
+      dir={directionOf(locale)}
+      className={plexArabic.variable}
+      suppressHydrationWarning
+    >
       <head>
         {/* Consent defaults must exist before GTM loads (Consent Mode v2). */}
         <script dangerouslySetInnerHTML={{ __html: consentDefaultScript }} />

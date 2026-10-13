@@ -15,3 +15,11 @@ html {
 body {
   @apply bg-white text-slate-900 antialiased;
 }
+
+/* Shown only while the visitor has not chosen; see consentDefaultScript in src/lib/consent.ts. */
+.consent-banner {
+  display: none;
+}
+html[data-consent='ask'] .consent-banner {
+  display: block;
+}
