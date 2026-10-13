@@ -15,8 +15,10 @@ a look that is distinctive, rooted in Riyadh, and easy to re-skin when the firm'
   white for focus rings and numerals). Saffron and pine come from painted Najdi doors and old-town
   plaster; the `brand-*` token names are kept so `/admin` follows the palette.
 - **Type:** Reem Kufi (geometric Kufi, Arabic and Latin) for headings; IBM Plex Sans Arabic for
-  body and forms. Reem Kufi is preloaded with `display: optional` because the hero headline is the
-  LCP element: a late swap would move LCP past the 2.5 s budget.
+  body and forms. Reem Kufi uses `display: optional` without a preload because the hero
+  headline is the LCP element: a late swap, or a preload competing with the CSS on slow 4G, moved
+  LCP past the 2.5 s budget on the live runs. First visits on a slow connection may show the body
+  face in headings; later page views use Reem Kufi from cache.
 - **Signature:** a Najdi parapet (the triangular crenellation of At-Turaif walls) drawn with a CSS
   mask on the top edge of pine blocks: the hero, the landing-page final call to action and the
   footer. It is the one decorative device; everything else stays quiet.
@@ -27,4 +29,4 @@ a look that is distinctive, rooted in Riyadh, and easy to re-skin when the firm'
 
 To re-skin for a firm, change the tokens at the top of `apps/web/src/app/globals.css` and the
 display font in `apps/web/src/app/fonts.ts`; components use the tokens, not raw colours. No new
-JavaScript; one extra font family (two preloaded woff2 files).
+JavaScript; one extra font family (two woff2 files, 32 KB, not preloaded).
