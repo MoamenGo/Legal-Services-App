@@ -61,6 +61,11 @@ jobs:
           pnpm -s admin:sql > "$RUNNER_TEMP/admin.sql"
           npx wrangler d1 execute DB --remote --file "$RUNNER_TEMP/admin.sql"
           rm "$RUNNER_TEMP/admin.sql"
+      - name: Export published content from D1
+        if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
+        working-directory: apps/web
+        # Articles and firm settings edited in /admin become part of the static build (ADR 0005).
+        run: pnpm -s content:export --remote
       - name: Build and deploy the Worker
         if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
         working-directory: apps/web

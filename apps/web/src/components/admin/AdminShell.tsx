@@ -19,8 +19,24 @@ export function AdminShell({ children }: { children: ReactNode }) {
     ...(session && session.role !== 'lawyer'
       ? [{ href: '/admin/reports', label: t('nav.reports'), active: pathname === '/admin/reports' }]
       : []),
+    ...(session
+      ? [
+          {
+            href: '/admin/articles',
+            label: t('nav.articles'),
+            active: pathname === '/admin/articles' || pathname === '/admin/article',
+          },
+        ]
+      : []),
     ...(session?.role === 'admin'
-      ? [{ href: '/admin/users', label: t('nav.users'), active: pathname === '/admin/users' }]
+      ? [
+          { href: '/admin/users', label: t('nav.users'), active: pathname === '/admin/users' },
+          {
+            href: '/admin/settings',
+            label: t('nav.settings'),
+            active: pathname === '/admin/settings',
+          },
+        ]
       : []),
   ];
 
@@ -36,13 +52,16 @@ export function AdminShell({ children }: { children: ReactNode }) {
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3">
           <span className="font-bold">{t('title')}</span>
           {session && (
-            <nav className="flex gap-1" aria-label={t('title')}>
+            <nav
+              className="order-last -mx-1 flex w-full gap-1 overflow-x-auto sm:order-none sm:mx-0 sm:w-auto"
+              aria-label={t('title')}
+            >
               {nav.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   aria-current={item.active ? 'page' : undefined}
-                  className={`inline-flex min-h-11 items-center rounded-md px-3 text-sm ${item.active ? 'bg-white/15 font-medium' : 'hover:bg-white/10'}`}
+                  className={`inline-flex min-h-11 shrink-0 items-center rounded-md px-3 text-sm whitespace-nowrap ${item.active ? 'bg-white/15 font-medium' : 'hover:bg-white/10'}`}
                 >
                   {item.label}
                 </Link>

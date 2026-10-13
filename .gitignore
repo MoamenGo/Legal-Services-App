@@ -15,3 +15,4 @@ coverage
 .DS_Store
 cloudflare-env.d.ts
 next-env.d.ts
+.content

@@ -171,3 +171,43 @@ export const jobs = sqliteTable(
   },
   (t) => [index('jobs_due_idx').on(t.status, t.runAfter), index('jobs_lead_id_idx').on(t.leadId)],
 );
+
+export type Localized = { ar: string; en?: string };
+
+/** Articles written in /admin. Pages read published ones at build time (ADR 0005). */
+export const articles = sqliteTable(
+  'articles',
+  {
+    id: text('id').primaryKey(),
+    slug: text('slug').notNull().unique(),
+    title: text('title', { mode: 'json' }).$type<Localized>().notNull(),
+    /** Used as the meta description and list teaser. */
+    summary: text('summary', { mode: 'json' }).$type<Localized>().notNull(),
+    /** Plain text with `## ` headings and `- ` lists; never HTML (ADR 0005). */
+    body: text('body', { mode: 'json' }).$type<Localized>().notNull(),
+    tags: text('tags', { mode: 'json' })
+      .$type<string[]>()
+      .notNull()
+      .default(sql`'[]'`),
+    published: integer('published', { mode: 'boolean' }).notNull().default(false),
+    publishedAt: integer('published_at', { mode: 'timestamp' }),
+    authorId: text('author_id').references(() => users.id),
+    createdAt: integer('created_at', { mode: 'timestamp' })
+      .notNull()
+      .default(sql`(unixepoch())`),
+    updatedAt: integer('updated_at', { mode: 'timestamp' })
+      .notNull()
+      .default(sql`(unixepoch())`),
+  },
+  (t) => [index('articles_published_idx').on(t.published, t.publishedAt)],
+);
+
+/** Firm details edited in /admin (phone, WhatsApp, address...). Keys are listed in settings/service.ts. */
+export const settings = sqliteTable('settings', {
+  key: text('key').primaryKey(),
+  // Null means "not provided"; the site hides that detail.
+  value: text('value', { mode: 'json' }),
+  updatedAt: integer('updated_at', { mode: 'timestamp' })
+    .notNull()
+    .default(sql`(unixepoch())`),
+});

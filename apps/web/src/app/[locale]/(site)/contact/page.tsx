@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { ConsultationCard } from '@/components/ConsultationSection';
 import { StickyCta, waLink } from '@/components/ContactButtons';
 import { Container } from '@/components/ui';
-import { site } from '@/content/site';
+import { firm } from '@/content/cms';
 import { resolveLocale } from '@/lib/locale';
 import { pageMetadata } from '@/lib/seo';
 
@@ -21,21 +21,21 @@ export async function generateMetadata({
 }
 
 export default async function ContactPage({ params }: PageProps<'/[locale]/contact'>) {
-  await resolveLocale(params);
+  const locale = await resolveLocale(params);
   const t = await getTranslations();
   const missing = t('contact.notProvided');
   const rows = [
     {
       label: t('contact.phone'),
-      value: site.phone ? (
+      value: firm.phone ? (
         <a
-          href={`tel:${site.phone}`}
+          href={`tel:${firm.phone}`}
           dir="ltr"
           data-event="click_to_call"
           data-location="contact_page"
           className="underline"
         >
-          {site.phone}
+          {firm.phone}
         </a>
       ) : (
         missing
@@ -43,16 +43,16 @@ export default async function ContactPage({ params }: PageProps<'/[locale]/conta
     },
     {
       label: t('contact.whatsapp'),
-      value: site.whatsapp ? (
+      value: firm.whatsapp ? (
         <a
-          href={waLink(site.whatsapp)}
+          href={waLink(firm.whatsapp)}
           dir="ltr"
           data-event="whatsapp_click"
           data-location="contact_page"
           rel="noopener"
           className="underline"
         >
-          {site.whatsapp}
+          {firm.whatsapp}
         </a>
       ) : (
         missing
@@ -60,16 +60,16 @@ export default async function ContactPage({ params }: PageProps<'/[locale]/conta
     },
     {
       label: t('contact.email'),
-      value: site.email ? (
-        <a href={`mailto:${site.email}`} className="underline">
-          {site.email}
+      value: firm.email ? (
+        <a href={`mailto:${firm.email}`} className="underline">
+          {firm.email}
         </a>
       ) : (
         missing
       ),
     },
-    { label: t('contact.address'), value: t('footer.address') },
-    { label: t('contact.hours'), value: t('contact.hoursValue') },
+    { label: t('contact.address'), value: firm.address(locale) ?? t('footer.address') },
+    { label: t('contact.hours'), value: firm.hours(locale) ?? t('contact.hoursValue') },
   ];
 
   return (

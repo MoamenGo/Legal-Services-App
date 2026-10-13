@@ -100,6 +100,33 @@ for (let i = 1; i <= 40; i++) {
   );
 }
 
+// One fake article (published) and fake firm details, so the CMS pages have something to show.
+const article = {
+  title: { ar: 'مقال تجريبي: مكافأة نهاية الخدمة', en: 'Sample article: end of service award' },
+  summary: { ar: 'نص تجريبي لأغراض التطوير فقط.', en: 'Placeholder text for development only.' },
+  body: {
+    ar: '## مقدمة\nهذا نص تجريبي لأغراض التطوير فقط، وليس معلومات قانونية.\n\n- بند أول\n- بند ثانٍ',
+    en: '## Introduction\nPlaceholder text for development only, not legal information.\n\n- First item\n- Second item',
+  },
+};
+statements.push(
+  `INSERT OR IGNORE INTO articles (id, slug, title, summary, body, tags, published, published_at, author_id) VALUES (${q(id('c', 1))}, 'sample-article', ${q(JSON.stringify(article.title))}, ${q(JSON.stringify(article.summary))}, ${q(JSON.stringify(article.body))}, '["تجريبي"]', 1, ${now}, ${q(users[0]!.id)});`,
+);
+const settings = {
+  phone: '+966500000999',
+  whatsapp: '+966500000999',
+  email: 'office@example.com',
+  address_ar: 'الرياض (عنوان تجريبي)',
+  address_en: 'Riyadh (sample address)',
+  hours_ar: 'الأحد إلى الخميس، 9 ص إلى 5 م (تجريبي)',
+  hours_en: 'Sun to Thu, 9am to 5pm (sample)',
+};
+for (const [key, value] of Object.entries(settings)) {
+  statements.push(
+    `INSERT OR IGNORE INTO settings (key, value) VALUES (${q(key)}, ${q(JSON.stringify(value))});`,
+  );
+}
+
 mkdirSync('.wrangler', { recursive: true });
 writeFileSync('.wrangler/seed.sql', statements.join('\n') + '\n');
 execFileSync(

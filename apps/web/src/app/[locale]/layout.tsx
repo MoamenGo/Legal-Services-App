@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import { ConsentBanner } from '@/components/ConsentBanner';
 import { JsonLd } from '@/components/JsonLd';
 import { SiteTracking } from '@/components/SiteTracking';
+import { firm } from '@/content/cms';
 import { site } from '@/content/site';
 import { directionOf, routing } from '@/i18n/routing';
 import { resolveLocale } from '@/lib/locale';
@@ -69,8 +70,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
             name: t('firmName'),
             url: absoluteUrl(locale),
             areaServed: { '@type': 'Country', name: 'Saudi Arabia' },
-            ...(site.phone ? { telephone: site.phone } : {}),
-            ...(site.email ? { email: site.email } : {}),
+            ...(firm.phone ? { telephone: firm.phone } : {}),
+            ...(firm.email ? { email: firm.email } : {}),
           }}
         />
         {/* No i18n runtime ships to the browser: client components get server-rendered strings. */}

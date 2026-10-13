@@ -11,14 +11,19 @@ export function pageMetadata({
   title,
   description,
   noindex = false,
+  locales = routing.locales,
+  type = 'website',
 }: {
   locale: Locale;
   path?: string;
   title: string;
   description: string;
   noindex?: boolean;
+  /** Locales the page exists in, for hreflang (an article may be Arabic only). */
+  locales?: readonly Locale[];
+  type?: 'website' | 'article';
 }): Metadata {
-  const languages = Object.fromEntries(routing.locales.map((l) => [l, absoluteUrl(l, path)]));
+  const languages = Object.fromEntries(locales.map((l) => [l, absoluteUrl(l, path)]));
   return {
     title,
     description,
@@ -26,7 +31,7 @@ export function pageMetadata({
       canonical: absoluteUrl(locale, path),
       languages: { ...languages, 'x-default': absoluteUrl(routing.defaultLocale, path) },
     },
-    openGraph: { title, description, url: absoluteUrl(locale, path), locale, type: 'website' },
+    openGraph: { title, description, url: absoluteUrl(locale, path), locale, type },
     robots: noindex ? { index: false, follow: false } : undefined,
   };
 }

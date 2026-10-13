@@ -30,7 +30,7 @@
 |---|---|
 | Language | TypeScript everywhere (`strict: true`) |
 | Monorepo | pnpm workspaces + Turborepo |
-| Public site | **Next.js (App Router)** — React, SSG/ISR. Never a client-only SPA for public pages. |
+| Public site | **Next.js (App Router)** — React, SSG served from Workers static assets; content edits publish by rebuilding (ADR 0005). Never a client-only SPA for public pages. |
 | Admin dashboard | Next.js route group `/admin` (client components allowed) |
 | API | Hono, mounted at `/api` inside the Next app (`apps/web/src/server/api`) |
 | Database | Cloudflare D1 (SQLite) + Drizzle ORM; SQL migrations in `apps/web/migrations` |

@@ -68,3 +68,21 @@ secrets can be deleted.
 
 Locally: `cd apps/web && pnpm db:migrate:local && pnpm seed`, then sign in as `admin@example.com`
 with `local-dev-password` (or the `SEED_PASSWORD` you set). `.dev.vars` needs `JWT_ACCESS_SECRET`.
+
+## Publishing content from /admin
+
+Articles and firm details saved in `/admin` go live when the site is rebuilt (ADR 0005). Every
+deploy exports them from D1, so they also appear with the next merge. To make **Publish changes**
+work from the dashboard:
+
+1. GitHub → Settings (your profile) → Developer settings → Fine-grained tokens → Generate new
+   token. Repository access: only this repository. Permissions: **Actions: Read and write**.
+   Expiry: the longest you are comfortable with (renew it before it expires).
+2. `cd apps/web && npx wrangler secret put GITHUB_DEPLOY_TOKEN` and paste the token.
+3. `GITHUB_REPOSITORY` in `apps/web/wrangler.jsonc` must be `owner/name` of this repository.
+
+Optional, for other tools: `npx wrangler secret put REVALIDATE_SECRET`, then
+`curl -X POST -H "x-revalidate-secret: <secret>" https://<site>/api/webhooks/revalidate`.
+
+Locally: `cd apps/web && pnpm content:export --local && pnpm preview` shows content saved in a local
+`/admin`.
