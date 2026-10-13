@@ -19,6 +19,13 @@ a look that is distinctive, rooted in Riyadh, and easy to re-skin when the firm'
   headline is the LCP element: a late swap, or a preload competing with the CSS on slow 4G, moved
   LCP past the 2.5 s budget on the live runs. First visits on a slow connection may show the body
   face in headings; later page views use Reem Kufi from cache.
+- **Amendment (2026-10-13):** IBM Plex Sans Arabic also moved from `swap` to `optional`, and
+  loads only 400 and 700 (Reem Kufi only 600, the one weight headings use). Live Lighthouse
+  measured CLS 0.118 on `/en` from the body face swapping in after first paint and re-wrapping the
+  hero intro above the form, and LCP 2.8 s on the landing page with eight font files (180 KB) on
+  the critical path; it is now six files (118 KB) and no swap. A first visit on a slow connection
+  may render in the system Arabic face; later pages use Plex from cache. This replaces the
+  `display: swap` line in AGENTS.md section 7.
 - **Signature:** a Najdi parapet (the triangular crenellation of At-Turaif walls) drawn with a CSS
   mask on the top edge of pine blocks: the hero, the landing-page final call to action and the
   footer. It is the one decorative device; everything else stays quiet.
@@ -29,4 +36,4 @@ a look that is distinctive, rooted in Riyadh, and easy to re-skin when the firm'
 
 To re-skin for a firm, change the tokens at the top of `apps/web/src/app/globals.css` and the
 display font in `apps/web/src/app/fonts.ts`; components use the tokens, not raw colours. No new
-JavaScript; one extra font family (two woff2 files, 32 KB, not preloaded).
+JavaScript; one extra font family (two woff2 files, one weight, not preloaded).

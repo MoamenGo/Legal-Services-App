@@ -182,7 +182,7 @@ Every admin read of a lead and every write must create an `AuditLog` entry.
 - Use logical CSS properties only. Never `ml-`/`mr-`/`left`/`right` for layout.
 - Mirror directional icons (arrows) in RTL.
 - All user-facing strings live in `messages/ar.json` and `messages/en.json`. No hardcoded text in components.
-- Arabic font self-hosted via `next/font` (e.g. IBM Plex Sans Arabic), `display: swap`.
+- Arabic font self-hosted via `next/font` (e.g. IBM Plex Sans Arabic), `display: optional` (ADR 0008: a late swap failed the CLS budget).
 
 ### Performance budgets (enforced in CI via Lighthouse CI)
 - Mobile Lighthouse Performance ≥ 90, Accessibility ≥ 95, SEO ≥ 95, Best Practices ≥ 95.

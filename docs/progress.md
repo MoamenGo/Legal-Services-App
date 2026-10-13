@@ -167,3 +167,12 @@ pnpm preview`, open `/ar/lp/labor-lawyer` at 360px and submit the form (needs in
 - What: a live Lighthouse run measured LCP at 2.5-3.6 s on `/en` and the landing page. The 32 KB
   Reem Kufi preload competed with the CSS on slow 4G, so it is no longer preloaded (ADR 0008).
 - Verify: Actions → Lighthouse after the deploy.
+
+## 2026-10-13: Fonts off the critical path
+
+- What: IBM Plex Sans Arabic uses `display: optional` and loads 400 and 700 only; Reem Kufi loads
+  only 600. AGENTS.md section 7 and ADR 0008 updated.
+- Why: after PR #16 the live Lighthouse run still failed CLS on `/en` (0.118, the body face swapping
+  in and re-wrapping the hero) and LCP on the landing page (2.8 s with 8 font files).
+- Verify: local Lighthouse shows CLS 0 and 6 font files (118 KB) on `/ar`; the Lighthouse workflow
+  after the deploy on main is the reference.
