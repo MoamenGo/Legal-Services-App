@@ -10,7 +10,7 @@ import { directionOf, routing } from '@/i18n/routing';
 import { resolveLocale } from '@/lib/locale';
 import { consentDefaultScript } from '@/lib/consent';
 import { absoluteUrl } from '@/lib/seo';
-import { plexArabic } from '../fonts';
+import { plexArabic, reemKufi } from '../fonts';
 import '../globals.css';
 
 export function generateStaticParams() {
@@ -33,7 +33,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
     <html
       lang={locale}
       dir={directionOf(locale)}
-      className={plexArabic.variable}
+      className={`${plexArabic.variable} ${reemKufi.variable}`}
       suppressHydrationWarning
     >
       <head>

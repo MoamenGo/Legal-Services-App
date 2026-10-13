@@ -51,9 +51,9 @@ export default async function ServicePage({ params }: PageProps<'/[locale]/servi
           { name: title, url: absoluteUrl(locale, `/services/${service.slug}`) },
         ])}
       />
-      <Container className="grid gap-8 py-10 sm:py-14 lg:grid-cols-[1fr_26rem] lg:items-start">
+      <Container className="grid gap-10 py-12 sm:py-16 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-start lg:gap-14">
         <article className="space-y-6">
-          <nav aria-label="breadcrumb" className="text-sm text-slate-500">
+          <nav aria-label="breadcrumb" className="text-sm text-muted">
             <ol className="flex flex-wrap gap-1">
               <li>
                 <Link href="/" className="underline-offset-4 hover:underline">
@@ -70,13 +70,19 @@ export default async function ServicePage({ params }: PageProps<'/[locale]/servi
               <li aria-current="page">{title}</li>
             </ol>
           </nav>
-          <h1 className="text-3xl font-bold text-brand-900 sm:text-4xl">{title}</h1>
-          <p className="text-lg text-slate-700">{t(`services.items.${service.key}.summary`)}</p>
-          <p className="leading-relaxed text-slate-700">
+          <h1 className="font-display text-4xl font-semibold text-brand-900 sm:text-5xl">
+            {title}
+          </h1>
+          <p className="border-s-4 border-saffron-400 ps-4 text-xl text-ink">
+            {t(`services.items.${service.key}.summary`)}
+          </p>
+          <p className="max-w-3xl text-lg leading-loose text-ink">
             {t(`services.items.${service.key}.body`)}
           </p>
-          <section>
-            <h2 className="mb-4 text-2xl font-bold text-brand-900">{t('services.faqTitle')}</h2>
+          <section className="pt-6">
+            <h2 className="mb-4 font-display text-2xl font-semibold text-brand-900 sm:text-3xl">
+              {t('services.faqTitle')}
+            </h2>
             <Faq items={faq} />
           </section>
         </article>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { Card, Prose, Section } from '@/components/ui';
+import { PageTitle, Prose, Section } from '@/components/ui';
 import { resolveLocale } from '@/lib/locale';
 import { pageMetadata } from '@/lib/seo';
 
@@ -23,30 +23,34 @@ export default async function AboutPage({ params }: PageProps<'/[locale]/about'>
   return (
     <>
       <Section>
-        <h1 className="text-3xl font-bold text-brand-900">{t('title')}</h1>
-        <div className="mt-4">
+        <PageTitle title={t('title')} />
+        <div className="mt-8">
           <Prose>
             <p>{t('intro')}</p>
-            <h2 className="pt-4 text-xl font-bold text-brand-900">{t('missionTitle')}</h2>
+            <h2 className="pt-6 font-display text-2xl font-semibold text-brand-900">
+              {t('missionTitle')}
+            </h2>
             <p>{t('mission')}</p>
           </Prose>
         </div>
       </Section>
-      <Section title={t('teamTitle')} className="bg-slate-50">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <Section title={t('teamTitle')} tone="gypsum">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {/* LawyerCard placeholder: photo, name, title and licence come from the firm. */}
-          <Card className="flex gap-4">
+          <article className="overflow-hidden rounded-2xl border border-line bg-white">
             <div
               role="img"
               aria-label={t('lawyerPhotoAlt')}
-              className="size-20 shrink-0 rounded-full bg-slate-200"
+              className="aspect-[4/3] bg-brand-100"
             />
-            <div className="min-w-0">
-              <h3 className="font-bold break-words text-brand-900">{t('lawyerName')}</h3>
-              <p className="text-sm break-words text-slate-500">{t('lawyerRole')}</p>
-              <p className="mt-2 text-sm break-words text-slate-600">{t('lawyerBio')}</p>
+            <div className="p-5">
+              <h3 className="font-display text-xl font-semibold break-words text-brand-900">
+                {t('lawyerName')}
+              </h3>
+              <p className="text-sm break-words text-muted">{t('lawyerRole')}</p>
+              <p className="mt-3 break-words">{t('lawyerBio')}</p>
             </div>
-          </Card>
+          </article>
         </div>
       </Section>
     </>

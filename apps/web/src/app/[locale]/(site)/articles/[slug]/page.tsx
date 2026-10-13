@@ -76,21 +76,21 @@ export default async function ArticlePage({ params }: PageProps<'/[locale]/artic
           { name: title, url: absoluteUrl(locale, `/articles/${slug}`) },
         ])}
       />
-      <Container className="py-10">
+      <Container className="py-12 sm:py-16">
         <article className="mx-auto max-w-3xl">
-          <nav aria-label="breadcrumb" className="text-sm text-slate-500">
+          <nav aria-label="breadcrumb" className="text-sm text-muted">
             <Link href="/articles" className="hover:underline">
               {t('articles.back')}
             </Link>
           </nav>
-          <h1 className="mt-3 text-3xl font-bold text-brand-900 sm:text-4xl">{title}</h1>
-          <p className="mt-2 text-sm text-slate-500">
-            {t('articles.published', { date: published })}
-          </p>
+          <h1 className="mt-4 font-display text-4xl font-semibold text-brand-900 sm:text-5xl">
+            {title}
+          </h1>
+          <p className="mt-3 text-sm text-muted">{t('articles.published', { date: published })}</p>
           <div className="mt-8">
             <ArticleBody text={localized(article.body, locale)} />
           </div>
-          <p className="mt-10 rounded-lg bg-slate-50 p-4 text-sm text-slate-600">
+          <p className="mt-12 border-s-4 border-saffron-400 bg-gypsum p-4 text-sm text-muted">
             {t('articles.disclaimer')}
           </p>
         </article>

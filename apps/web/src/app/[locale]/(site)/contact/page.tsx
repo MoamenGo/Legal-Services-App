@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { ConsultationCard } from '@/components/ConsultationSection';
 import { StickyCta, waLink } from '@/components/ContactButtons';
-import { Container } from '@/components/ui';
+import { Container, PageTitle } from '@/components/ui';
 import { firm } from '@/content/cms';
 import { resolveLocale } from '@/lib/locale';
 import { pageMetadata } from '@/lib/seo';
@@ -74,15 +74,17 @@ export default async function ContactPage({ params }: PageProps<'/[locale]/conta
 
   return (
     <>
-      <Container className="grid gap-8 py-10 sm:py-14 lg:grid-cols-[1fr_26rem] lg:items-start">
+      <Container className="grid gap-10 py-12 sm:py-16 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-start lg:gap-14">
         <div>
-          <h1 className="text-3xl font-bold text-brand-900">{t('contact.title')}</h1>
-          <p className="mt-2 max-w-xl text-slate-600">{t('contact.intro')}</p>
-          <dl className="mt-8 space-y-4">
+          <PageTitle title={t('contact.title')} intro={t('contact.intro')} />
+          <dl className="mt-10 border-t border-line">
             {rows.map((row) => (
-              <div key={row.label}>
-                <dt className="text-sm text-slate-500">{row.label}</dt>
-                <dd className="font-medium break-words text-brand-900">{row.value}</dd>
+              <div
+                key={row.label}
+                className="grid gap-1 border-b border-line py-4 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-6"
+              >
+                <dt className="text-muted">{row.label}</dt>
+                <dd className="text-lg font-medium break-words text-brand-900">{row.value}</dd>
               </div>
             ))}
           </dl>

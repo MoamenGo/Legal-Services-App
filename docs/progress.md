@@ -145,3 +145,11 @@ pnpm preview`, open `/ar/lp/labor-lawyer` at 360px and submit the form (needs in
 - What: the landing-page JavaScript budget is 160 KB (ADR 0007), up from 120 KB, because React and
   Next.js alone are about 150 KB. Lighthouse CI now fails, rather than warns, above it.
 - Verify: Actions → Lighthouse after the deploy.
+
+## 2026-10-13: New visual identity
+
+- What: the public site and landing pages have a new design (ADR 0008): pine and saffron palette,
+  Reem Kufi headings, a Najdi parapet edge on the hero and footer, practice areas as an index,
+  restyled form, FAQ, steps, trust band, contact and article pages. `/admin` follows the palette.
+- Verify: open `/ar`, `/en`, `/ar/lp/labor-lawyer` at 360px and desktop; Actions → Lighthouse
+  after the deploy.

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { ConsultationCard } from '@/components/ConsultationSection';
 import { StickyCta } from '@/components/ContactButtons';
 import { JsonLd, faqPageLd } from '@/components/JsonLd';
-import { Container, Faq, Section, Steps, TrustBadges, buttonClass } from '@/components/ui';
+import { Faq, Hero, Section, Steps, TrustBadges, buttonClass } from '@/components/ui';
 import { findLandingPage, landingPages } from '@/content/landing-pages';
 import { routing } from '@/i18n/routing';
 import { resolveLocale } from '@/lib/locale';
@@ -47,27 +47,21 @@ export default async function LandingPage({ params }: PageProps<'/[locale]/lp/[s
   return (
     <>
       <JsonLd data={faqPageLd(faq)} />
-      <div className="bg-gradient-to-b from-brand-50 to-white">
-        {/* On mobile the form follows a two-line hero so it sits above the fold at 360px. */}
-        <Container className="grid gap-5 py-5 sm:py-10 lg:grid-cols-[1fr_26rem] lg:items-start lg:gap-8">
-          <div className="space-y-2 lg:space-y-4 lg:pt-8">
-            <h1 className="text-2xl font-bold leading-snug text-brand-900 sm:text-4xl">
-              {t(`landing.pages.${page.slug}.headline`)}
-            </h1>
-            <p className="text-slate-600 sm:text-lg">
-              {t(`landing.pages.${page.slug}.subheadline`)}
-            </p>
-          </div>
-          <ConsultationCard
-            title={t('landing.formTitle')}
-            location={location}
-            defaultCaseType={page.service}
-            variant="short"
-          />
-        </Container>
-      </div>
+      {/* On mobile the form follows a short hero so it starts above the fold at 360px. */}
+      <Hero
+        compact
+        title={t(`landing.pages.${page.slug}.headline`)}
+        intro={t(`landing.pages.${page.slug}.subheadline`)}
+      >
+        <ConsultationCard
+          title={t('landing.formTitle')}
+          location={location}
+          defaultCaseType={page.service}
+          variant="short"
+        />
+      </Hero>
 
-      <Section title={t('trust.title')} className="bg-slate-50">
+      <Section title={t('trust.title')} tone="pine" className="pt-4 sm:pt-6">
         <TrustBadges items={t.raw('trust.items') as { label: string; value: string }[]} />
       </Section>
 
@@ -75,15 +69,19 @@ export default async function LandingPage({ params }: PageProps<'/[locale]/lp/[s
         <Steps items={t.raw('steps.items') as { title: string; body: string }[]} />
       </Section>
 
-      <Section title={t('home.faqTitle')} className="bg-slate-50">
+      <Section title={t('home.faqTitle')} tone="gypsum">
         <Faq items={faq} />
       </Section>
 
       <Section>
-        <div className="rounded-2xl bg-brand-900 p-6 text-center text-white sm:p-10">
-          <h2 className="text-2xl font-bold">{t('landing.finalCtaTitle')}</h2>
-          <p className="mt-2 text-brand-50">{t('landing.finalCtaBody')}</p>
-          <a href="#consultation" className={`${buttonClass.secondary} mt-6 border-white bg-white`}>
+        <div className="najdi-top on-pine rounded-b-3xl bg-brand-900 px-6 py-10 text-center text-white sm:px-12 sm:py-14">
+          <h2 className="font-display text-3xl font-semibold sm:text-4xl">
+            {t('landing.finalCtaTitle')}
+          </h2>
+          <p className="mx-auto mt-3 max-w-lg text-lg text-brand-100">
+            {t('landing.finalCtaBody')}
+          </p>
+          <a href="#consultation" className={`${buttonClass.saffron} mt-8`}>
             {t('common.ctaConsultation')}
           </a>
         </div>
