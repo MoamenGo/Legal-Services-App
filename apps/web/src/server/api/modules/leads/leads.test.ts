@@ -1,9 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { api } from '../../app';
+import { enqueue } from '@/server/jobs/outbox';
 import { createLead } from './service';
 
 vi.mock('./service', () => ({
   createLead: vi.fn(async () => '0190a4c8-0000-7000-8000-000000000000'),
+}));
+vi.mock('@/server/jobs/outbox', () => ({
+  enqueue: vi.fn(async () => ['job-1']),
+  runJobs: vi.fn(async () => []),
 }));
 
 const validLead = {
@@ -52,6 +57,11 @@ describe('POST /api/leads', () => {
     expect(saved.phone).toBe('+966551234567');
     expect(saved.source.gclid).toBe('test-gclid');
     expect(fetchMock).toHaveBeenCalledOnce();
+    const queued = vi
+      .mocked(enqueue)
+      .mock.calls.at(-1)![1]
+      .map((j) => j.type);
+    expect(queued).toEqual(['intake_email', 'intake_whatsapp', 'client_email', 'ga4_lead']);
   });
 
   it('rejects invalid input with the shared error shape and no values echoed', async () => {

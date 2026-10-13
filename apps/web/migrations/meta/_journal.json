@@ -15,6 +15,13 @@
       "when": 1791901642547,
       "tag": "0001_admin_auth",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1791902852752,
+      "tag": "0002_lead_jobs",
+      "breakpoints": true
     }
   ]
 }

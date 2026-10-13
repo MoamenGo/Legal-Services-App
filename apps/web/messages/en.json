@@ -456,7 +456,8 @@
       "notes": "Notes",
       "noNotes": "No notes yet.",
       "call": "Call",
-      "whatsapp": "WhatsApp"
+      "whatsapp": "WhatsApp",
+      "jobs": "Notifications and conversions"
     },
     "users": {
       "heading": "Users",
@@ -485,6 +486,32 @@
       "forbidden": "You do not have permission for this.",
       "validation": "Please check the values you entered."
     },
-    "loading": "Loading…"
+    "loading": "Loading…",
+    "jobs": {
+      "intake_email": "Intake team email",
+      "intake_whatsapp": "Intake team WhatsApp",
+      "client_email": "Client auto-reply",
+      "ga4_lead": "Google Analytics event",
+      "ads_conversion": "Google Ads conversion",
+      "status": {
+        "pending": "Sending",
+        "done": "Done",
+        "skipped": "Not set up",
+        "failed": "Failed"
+      }
+    }
+  },
+  "emails": {
+    "intakeSubject": "New consultation request: {caseType}",
+    "intakeIntro": "A new consultation request arrived from the website.",
+    "name": "Name",
+    "phone": "Phone",
+    "caseType": "Case type",
+    "preferredContact": "Preferred contact",
+    "campaign": "Campaign",
+    "notSet": "Not set",
+    "intakeLink": "Open it in the dashboard:",
+    "clientSubject": "We received your consultation request",
+    "clientBody": "Hello {name},\n\nThank you for contacting {firm}. We received your consultation request and a member of our team will contact you as soon as possible during working hours.\n\nThis is an automatic message and is not legal advice.\n\n{firm}"
   }
 }

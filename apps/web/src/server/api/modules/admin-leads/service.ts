@@ -1,6 +1,6 @@
 import { and, count, desc, eq, gte, like, lt, or, sql, type SQL } from 'drizzle-orm';
 import { createDb } from '@/server/db/client';
-import { leadNotes, leads, leadStatuses, users } from '@/server/db/schema';
+import { jobs, leadNotes, leads, leadStatuses, users } from '@/server/db/schema';
 import { uuidv7 } from '@/server/lib/uuid';
 import type { AuthUser } from '../../env';
 
@@ -82,7 +82,19 @@ export async function getLead(d1: D1Database, id: string, user: AuthUser) {
     .leftJoin(users, eq(users.id, leadNotes.userId))
     .where(eq(leadNotes.leadId, id))
     .orderBy(desc(leadNotes.createdAt));
-  return { ...lead, notes };
+  // Delivery state of notifications and Ads uploads, so staff can see what went out.
+  const leadJobs = await db
+    .select({
+      type: jobs.type,
+      status: jobs.status,
+      attempts: jobs.attempts,
+      lastError: jobs.lastError,
+      updatedAt: jobs.updatedAt,
+    })
+    .from(jobs)
+    .where(eq(jobs.leadId, id))
+    .orderBy(desc(jobs.createdAt));
+  return { ...lead, notes, jobs: leadJobs };
 }
 
 export type LeadPatch = {

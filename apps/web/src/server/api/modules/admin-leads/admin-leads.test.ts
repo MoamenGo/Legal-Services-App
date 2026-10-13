@@ -113,6 +113,23 @@ describe('PATCH /api/admin/leads/:id', () => {
       .bind(leadIds.mine)
       .first<{ diff: string }>();
     expect(JSON.parse(row!.diff)).toEqual({ status: ['new', 'qualified'], value: [null, 15000] });
+
+    // The lead came from an ad (gclid), so qualifying it queues one offline conversion upload.
+    const jobs = await ctx.db
+      .prepare("select payload from jobs where type = 'ads_conversion' and lead_id = ?")
+      .bind(leadIds.mine)
+      .all<{ payload: string }>();
+    expect(jobs.results).toHaveLength(1);
+    expect(JSON.parse(jobs.results[0]!.payload)).toMatchObject({ action: 'qualified' });
+  });
+
+  it('does not queue a conversion for a lead without a click id', async () => {
+    expect((await patch(leadIds.other, { status: 'qualified' }, 'admin')).status).toBe(200);
+    const row = await ctx.db
+      .prepare('select count(*) as n from jobs where lead_id = ?')
+      .bind(leadIds.other)
+      .first<{ n: number }>();
+    expect(row?.n).toBe(0);
   });
 
   it('lets a lawyer update their own lead but not reassign it or touch others', async () => {

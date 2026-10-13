@@ -128,3 +128,46 @@ export const auditLog = sqliteTable(
     index('audit_log_at_idx').on(t.at),
   ],
 );
+
+export const jobTypes = [
+  'intake_email',
+  'intake_whatsapp',
+  'client_email',
+  'ga4_lead',
+  'ads_conversion',
+] as const;
+export type JobType = (typeof jobTypes)[number];
+export const jobStatuses = ['pending', 'done', 'skipped', 'failed'] as const;
+
+/**
+ * Outbox for work that must not slow down or fail the request that caused it (AGENTS.md section 6).
+ * Rows run right after the response and are retried by the cron trigger with backoff (ADR 0004).
+ */
+export const jobs = sqliteTable(
+  'jobs',
+  {
+    id: text('id').primaryKey(),
+    type: text('type', { enum: jobTypes }).notNull(),
+    leadId: text('lead_id').references(() => leads.id),
+    /** JSON input for the handler; never more PII than the handler needs. */
+    payload: text('payload', { mode: 'json' })
+      .$type<Record<string, unknown>>()
+      .notNull()
+      .default(sql`'{}'`),
+    /** Stops the same job being queued twice, e.g. one Ads upload per lead and status. */
+    dedupeKey: text('dedupe_key').unique(),
+    status: text('status', { enum: jobStatuses }).notNull().default('pending'),
+    attempts: integer('attempts').notNull().default(0),
+    runAfter: integer('run_after', { mode: 'timestamp' })
+      .notNull()
+      .default(sql`(unixepoch())`),
+    lastError: text('last_error'),
+    createdAt: integer('created_at', { mode: 'timestamp' })
+      .notNull()
+      .default(sql`(unixepoch())`),
+    updatedAt: integer('updated_at', { mode: 'timestamp' })
+      .notNull()
+      .default(sql`(unixepoch())`),
+  },
+  (t) => [index('jobs_due_idx').on(t.status, t.runAfter), index('jobs_lead_id_idx').on(t.leadId)],
+);
