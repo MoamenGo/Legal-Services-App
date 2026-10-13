@@ -1,14 +1,372 @@
 {
   "meta": {
-    "title": "Legal consultation | [CLIENT TO PROVIDE]",
-    "description": "Request a legal consultation with a licensed lawyer. [CLIENT TO PROVIDE]"
+    "title": "Legal consultation | [CLIENT TO PROVIDE: firm name]",
+    "description": "Request a legal consultation with a licensed lawyer in Saudi Arabia. [CLIENT TO PROVIDE]"
   },
-  "home": {
+  "common": {
     "firmName": "[CLIENT TO PROVIDE: firm name]",
     "switchLanguage": "العربية",
-    "headline": "Clear legal advice for your case",
-    "subheadline": "Get in touch and a lawyer will call you to discuss your situation.",
     "ctaConsultation": "Request a consultation",
-    "templateNotice": "This is a template preview; final content comes from the client."
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "skipToContent": "Skip to content",
+    "templateNotice": "Template preview: firm details marked [CLIENT TO PROVIDE] will be replaced with the firm's own."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "articles": "Articles",
+    "contact": "Contact",
+    "menu": "Menu"
+  },
+  "footer": {
+    "rights": "© {year} {firm}. All rights reserved.",
+    "license": "Licence: [CLIENT TO PROVIDE: Saudi Bar licence number]",
+    "disclaimer": "Information on this site is general and is not legal advice. Contacting us does not create a lawyer–client relationship.",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use",
+    "address": "[CLIENT TO PROVIDE: office address, Riyadh]"
+  },
+  "home": {
+    "metaTitle": "Legal consultation in Saudi Arabia | [CLIENT TO PROVIDE: firm name]",
+    "metaDescription": "Tell us about your case and a lawyer will call you back. Family, labour, commercial, criminal and real estate matters.",
+    "headline": "Clear legal advice for your case",
+    "subheadline": "Tell us briefly about your situation and a lawyer from the firm will contact you to discuss it.",
+    "servicesTitle": "How we can help",
+    "servicesIntro": "Practice areas the firm handles.",
+    "viewAllServices": "All services",
+    "faqTitle": "Common questions",
+    "formTitle": "Request a consultation",
+    "formIntro": "Leave your details and we will contact you."
+  },
+  "steps": {
+    "title": "How it works",
+    "items": [
+      {
+        "title": "Send your request",
+        "body": "Fill in the short form with your name, phone number and case type."
+      },
+      {
+        "title": "A lawyer contacts you",
+        "body": "A member of the firm calls or messages you to understand your situation."
+      },
+      {
+        "title": "Agree on next steps",
+        "body": "You get a clear explanation of your options and how the firm can help."
+      }
+    ]
+  },
+  "trust": {
+    "title": "Why clients choose the firm",
+    "items": [
+      {
+        "label": "Licence",
+        "value": "[CLIENT TO PROVIDE: Saudi Bar licence]"
+      },
+      {
+        "label": "Years of experience",
+        "value": "[CLIENT TO PROVIDE]"
+      },
+      {
+        "label": "Cases handled",
+        "value": "[CLIENT TO PROVIDE]"
+      },
+      {
+        "label": "Lawyers",
+        "value": "[CLIENT TO PROVIDE]"
+      }
+    ]
+  },
+  "faq": {
+    "items": [
+      {
+        "q": "How do I request a consultation?",
+        "a": "Fill in the form on this page or use the call and WhatsApp buttons. A member of the firm will contact you."
+      },
+      {
+        "q": "Is my information kept confidential?",
+        "a": "Yes. Your details are used only to respond to your request, as described in our privacy policy."
+      },
+      {
+        "q": "How much does a consultation cost?",
+        "a": "[CLIENT TO PROVIDE: consultation fees]"
+      }
+    ]
+  },
+  "services": {
+    "metaTitle": "Legal services | [CLIENT TO PROVIDE: firm name]",
+    "metaDescription": "Family, labour, commercial, criminal and real estate law services in Saudi Arabia.",
+    "title": "Our services",
+    "intro": "Choose a practice area to learn more, or request a consultation directly.",
+    "readMore": "Learn more",
+    "faqTitle": "Questions about this service",
+    "formTitle": "Ask about this service",
+    "items": {
+      "family": {
+        "title": "Family law",
+        "summary": "Marriage, divorce, custody, alimony and inheritance matters.",
+        "body": "Family disputes are personal and often urgent. The firm advises on marriage contracts, divorce and khula, custody and visitation, alimony, and the division of inheritance, and represents clients before the personal status courts.",
+        "faq": [
+          {
+            "q": "Can you help with custody arrangements?",
+            "a": "Yes. The firm advises on custody and visitation and can represent you in court."
+          },
+          {
+            "q": "Do you handle inheritance division?",
+            "a": "Yes, including disputes between heirs and the procedures for dividing an estate."
+          },
+          {
+            "q": "What should I bring to the first consultation?",
+            "a": "Any documents related to your case, such as the marriage contract, court orders or correspondence."
+          }
+        ]
+      },
+      "labor": {
+        "title": "Labour law",
+        "summary": "Wrongful dismissal, end-of-service benefits, unpaid wages and employment contracts.",
+        "body": "The firm helps employees and employers with employment contracts, wrongful dismissal claims, end-of-service benefits, unpaid wages, and cases before the labour courts and the amicable settlement stage.",
+        "faq": [
+          {
+            "q": "I was dismissed. Can I claim compensation?",
+            "a": "It depends on your contract and the reason for dismissal. A lawyer will review your situation and explain your options."
+          },
+          {
+            "q": "Do you represent employers too?",
+            "a": "Yes. The firm advises employers on contracts, policies and disputes."
+          },
+          {
+            "q": "What documents help my case?",
+            "a": "Your employment contract, salary records, and any letters or messages from your employer."
+          }
+        ]
+      },
+      "commercial": {
+        "title": "Commercial law",
+        "summary": "Company formation, contracts, partnership disputes and debt collection.",
+        "body": "The firm advises businesses on company formation, drafting and reviewing contracts, partnership disputes, debt collection, and cases before the commercial courts.",
+        "faq": [
+          {
+            "q": "Can you review a contract before I sign it?",
+            "a": "Yes. Contract review and drafting is a core part of the firm's commercial work."
+          },
+          {
+            "q": "Do you handle disputes between partners?",
+            "a": "Yes, including negotiation and litigation before the commercial courts."
+          },
+          {
+            "q": "Can you help collect unpaid invoices?",
+            "a": "Yes. A lawyer will review the documents and advise on the best route to recover the debt."
+          }
+        ]
+      },
+      "criminal": {
+        "title": "Criminal law",
+        "summary": "Defence in criminal cases, investigations and appeals.",
+        "body": "The firm represents clients during investigation and trial, prepares defence memoranda, and handles appeals. Early legal advice can make an important difference.",
+        "faq": [
+          {
+            "q": "Can a lawyer attend the investigation with me?",
+            "a": "A lawyer can advise you on your rights and, where permitted, attend with you."
+          },
+          {
+            "q": "Do you handle appeals?",
+            "a": "Yes. The firm prepares appeals against criminal judgments."
+          },
+          {
+            "q": "Is the consultation confidential?",
+            "a": "Yes. Everything you share with the firm is kept confidential."
+          }
+        ]
+      },
+      "real_estate": {
+        "title": "Real estate law",
+        "summary": "Property disputes, sale contracts, leases and title deeds.",
+        "body": "The firm advises on property sale and purchase contracts, leases, disputes between owners and tenants, title deed issues, and real estate development agreements.",
+        "faq": [
+          {
+            "q": "Can you help with a tenant who will not pay?",
+            "a": "Yes. The firm advises landlords on eviction and rent recovery procedures."
+          },
+          {
+            "q": "Do you review property sale contracts?",
+            "a": "Yes, before signing and when disputes arise."
+          },
+          {
+            "q": "Can you help with title deed problems?",
+            "a": "Yes. A lawyer will review the deed and advise on the correct procedure."
+          }
+        ]
+      }
+    }
+  },
+  "about": {
+    "metaTitle": "About the firm | [CLIENT TO PROVIDE: firm name]",
+    "metaDescription": "Learn about the firm and its lawyers.",
+    "title": "About the firm",
+    "intro": "[CLIENT TO PROVIDE: a short introduction to the firm, its history and its approach]",
+    "missionTitle": "Our approach",
+    "mission": "[CLIENT TO PROVIDE: the firm's mission and values]",
+    "teamTitle": "Our lawyers",
+    "lawyerName": "[CLIENT TO PROVIDE: lawyer name]",
+    "lawyerRole": "[CLIENT TO PROVIDE: title]",
+    "lawyerBio": "[CLIENT TO PROVIDE: short bio and licence number]",
+    "lawyerPhotoAlt": "Photo of the lawyer"
+  },
+  "articles": {
+    "metaTitle": "Legal articles | [CLIENT TO PROVIDE: firm name]",
+    "metaDescription": "Articles on legal topics from the firm's lawyers.",
+    "title": "Articles",
+    "intro": "Practical legal articles written by the firm's lawyers.",
+    "empty": "No articles yet. They will appear here once the firm publishes them."
+  },
+  "contact": {
+    "metaTitle": "Contact us | [CLIENT TO PROVIDE: firm name]",
+    "metaDescription": "Contact the firm to request a legal consultation.",
+    "title": "Contact us",
+    "intro": "Send us a request and a lawyer will contact you, or reach us directly.",
+    "phone": "Phone",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "address": "Address",
+    "hours": "Office hours",
+    "hoursValue": "[CLIENT TO PROVIDE: office hours]",
+    "notProvided": "[CLIENT TO PROVIDE]"
+  },
+  "privacy": {
+    "metaTitle": "Privacy policy | [CLIENT TO PROVIDE: firm name]",
+    "metaDescription": "How the firm collects, uses and protects your personal data.",
+    "title": "Privacy policy",
+    "draftNotice": "Draft for the firm's legal review before launch.",
+    "sections": [
+      {
+        "title": "Data we collect",
+        "body": [
+          "When you request a consultation we collect your name, phone number, email (optional), case type and your message.",
+          "We also record how you reached the site (for example the advertising campaign or referring page) and your device type."
+        ]
+      },
+      {
+        "title": "Why we use it",
+        "body": [
+          "To contact you about your request and provide legal services.",
+          "To measure which advertising brings genuine requests, only where you have agreed to cookies."
+        ]
+      },
+      {
+        "title": "How long we keep it",
+        "body": [
+          "Requests are kept for up to 24 months, after which personal details are deleted or anonymised, unless the law requires longer."
+        ]
+      },
+      {
+        "title": "Who we share it with",
+        "body": [
+          "Only service providers that host and run the site and our communications, under confidentiality obligations. We do not sell your data."
+        ]
+      },
+      {
+        "title": "Your rights",
+        "body": [
+          "Under the Saudi Personal Data Protection Law you can ask to access, correct or delete your data. Contact us at [CLIENT TO PROVIDE: privacy contact email]."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "metaTitle": "Terms of use | [CLIENT TO PROVIDE: firm name]",
+    "metaDescription": "Terms for using this website.",
+    "title": "Terms of use",
+    "draftNotice": "Draft for the firm's legal review before launch.",
+    "sections": [
+      {
+        "title": "General information only",
+        "body": [
+          "Content on this site is general information and is not legal advice for your situation."
+        ]
+      },
+      {
+        "title": "No lawyer–client relationship",
+        "body": [
+          "Sending a request through the site does not create a lawyer–client relationship until the firm confirms it in writing."
+        ]
+      },
+      {
+        "title": "No guaranteed outcomes",
+        "body": ["Every case is different. The firm does not guarantee the result of any case."]
+      },
+      {
+        "title": "Contact",
+        "body": ["Questions about these terms: [CLIENT TO PROVIDE: contact email]."]
+      }
+    ]
+  },
+  "thankYou": {
+    "metaTitle": "Request received",
+    "title": "Thank you, we received your request",
+    "body": "A member of the firm will contact you soon on the number you provided.",
+    "backHome": "Back to home"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you are looking for does not exist or has moved.",
+    "backHome": "Back to home"
+  },
+  "landing": {
+    "formTitle": "Get a call back",
+    "finalCtaTitle": "Ready to discuss your case?",
+    "finalCtaBody": "Send your details and a lawyer will contact you.",
+    "pages": {
+      "labor-lawyer": {
+        "metaTitle": "Labour lawyer in Riyadh | [CLIENT TO PROVIDE: firm name]",
+        "headline": "Labour lawyer for your employment case",
+        "subheadline": "Wrongful dismissal, unpaid wages or end-of-service benefits? Tell us about your case and a lawyer will call you."
+      },
+      "family-lawyer": {
+        "metaTitle": "Family lawyer in Riyadh | [CLIENT TO PROVIDE: firm name]",
+        "headline": "Family lawyer for custody, divorce and alimony",
+        "subheadline": "Talk to a lawyer about your family matter in confidence. Leave your number and we will call you."
+      }
+    }
+  },
+  "form": {
+    "name": "Full name",
+    "phone": "Mobile number",
+    "phoneHint": "05XXXXXXXX",
+    "caseType": "Case type",
+    "caseTypePlaceholder": "Choose a case type",
+    "caseTypes": {
+      "family": "Family",
+      "labor": "Labour",
+      "commercial": "Commercial",
+      "criminal": "Criminal",
+      "real_estate": "Real estate",
+      "other": "Other"
+    },
+    "message": "Briefly describe your case (optional)",
+    "email": "Email (optional)",
+    "preferredContact": "Preferred contact method",
+    "preferredContacts": {
+      "call": "Phone call",
+      "whatsapp": "WhatsApp",
+      "email": "Email"
+    },
+    "privacy": "I agree to the <link>privacy policy</link>",
+    "marketing": "Send me legal updates from the firm (optional)",
+    "website": "Leave this field empty",
+    "submit": "Request a consultation",
+    "submitting": "Sending…",
+    "verifying": "Verifying you are not a robot…",
+    "errors": {
+      "name": "Enter your full name.",
+      "phone": "Enter a Saudi mobile number, for example 05XXXXXXXX.",
+      "email": "Enter a valid email or leave it empty.",
+      "caseType": "Choose a case type.",
+      "message": "Your message is too long.",
+      "privacyAccepted": "Please accept the privacy policy.",
+      "captcha": "Verification failed. Please try again.",
+      "rateLimited": "Too many requests. Please wait a minute and try again.",
+      "generic": "Something went wrong. Please try again or call us."
+    }
   }
 }

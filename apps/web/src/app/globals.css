@@ -3,6 +3,7 @@
 @theme {
   --font-sans: var(--font-plex-arabic), ui-sans-serif, system-ui, sans-serif;
   --color-brand-900: #10243e;
+  --color-brand-50: #eef3f9;
   --color-brand-700: #1d3d66;
   --color-accent-500: #b8893b;
 }

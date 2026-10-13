@@ -3,4 +3,5 @@
 NEXTJS_ENV=development
 JWT_ACCESS_SECRET=
 JWT_REFRESH_SECRET=
+# Leave empty to use Turnstile's public test secret (only while the site key is the test key).
 TURNSTILE_SECRET_KEY=

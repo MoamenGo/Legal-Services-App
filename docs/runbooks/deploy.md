@@ -24,6 +24,21 @@ Until the two repo secrets below exist, the deploy job skips with a notice and C
 5. Set runtime secrets as they are introduced, e.g. `npx wrangler secret put TURNSTILE_SECRET_KEY`.
 6. Merge to `main`. The site is served at `https://legal-services-app.<your-subdomain>.workers.dev`.
 
+## Turnstile (spam protection on the lead form)
+
+The template ships with Cloudflare's public Turnstile **test** keys so the form works out of the box.
+Test keys accept every visitor, so switch to real keys before sending ad traffic (ADR 0002):
+
+1. Cloudflare dashboard → Turnstile → Add widget. Hostname: the site's domain (and the
+   `*.workers.dev` one while it is used). Mode: Managed.
+2. GitHub → Settings → Secrets and variables → Actions → **Variables** → add
+   `NEXT_PUBLIC_TURNSTILE_SITE_KEY` with the site key (it is public, so a variable, not a secret).
+3. `cd apps/web && npx wrangler secret put TURNSTILE_SECRET_KEY` and paste the secret key.
+4. Re-run the Deploy workflow (or merge any change) so the pages rebuild with the new site key.
+
+Once a real site key is set, the API refuses leads (503 `captcha_not_configured`) until the secret
+is set too, so do step 3 before step 4.
+
 ## Manual deploy
 
 ```sh

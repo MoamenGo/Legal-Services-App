@@ -20,13 +20,16 @@
   },
   "dependencies": {
     "@app/schemas": "workspace:*",
+    "@hookform/resolvers": "^5.9.1",
     "@opennextjs/cloudflare": "^1.20.10",
     "drizzle-orm": "^0.45.4",
     "hono": "^4.13.13",
     "next": "~16.3.8",
     "next-intl": "^4.14.9",
     "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "react-dom": "^19.3.0",
+    "react-hook-form": "^7.90.0",
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
