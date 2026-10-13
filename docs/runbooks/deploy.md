@@ -47,6 +47,12 @@ pnpm db:migrate:remote
 pnpm run deploy
 ```
 
+## End-to-end tests
+
+`cd apps/web && pnpm e2e:prepare && pnpm e2e` builds the Worker, fills the local database with fake
+data and runs the browser tests in `e2e/`. The `E2E` workflow does the same on every pull request
+and keeps the HTML report as a run artifact.
+
 ## Rollback, backups and launch
 
 - Rolling back a bad deploy: `docs/runbooks/rollback.md`.
