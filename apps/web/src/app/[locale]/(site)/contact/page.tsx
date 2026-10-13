@@ -28,7 +28,13 @@ export default async function ContactPage({ params }: PageProps<'/[locale]/conta
     {
       label: t('contact.phone'),
       value: site.phone ? (
-        <a href={`tel:${site.phone}`} dir="ltr" data-event="click_to_call" className="underline">
+        <a
+          href={`tel:${site.phone}`}
+          dir="ltr"
+          data-event="click_to_call"
+          data-location="contact_page"
+          className="underline"
+        >
           {site.phone}
         </a>
       ) : (
@@ -42,6 +48,7 @@ export default async function ContactPage({ params }: PageProps<'/[locale]/conta
           href={waLink(site.whatsapp)}
           dir="ltr"
           data-event="whatsapp_click"
+          data-location="contact_page"
           rel="noopener"
           className="underline"
         >

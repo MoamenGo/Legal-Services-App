@@ -19,7 +19,7 @@ export type LeadFilters = {
 const visibleTo = (user: AuthUser): SQL | undefined =>
   user.role === 'lawyer' ? eq(leads.assignedTo, user.id) : undefined;
 
-function whereFor(filters: Omit<LeadFilters, 'page'>, user: AuthUser) {
+export function whereFor(filters: Omit<LeadFilters, 'page'>, user: AuthUser) {
   const conditions: (SQL | undefined)[] = [visibleTo(user)];
   if (filters.status) conditions.push(eq(leads.status, filters.status));
   if (filters.from)

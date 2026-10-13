@@ -13,6 +13,7 @@ import { useForm, type Resolver } from 'react-hook-form';
 import { site } from '@/content/site';
 import { collectSource } from '@/lib/attribution';
 import { pushEvent } from '@/lib/datalayer';
+import { rememberUserData } from '@/lib/enhanced-conversions';
 import { loadTurnstile } from '@/lib/turnstile';
 import type { FormInput, FormOutput } from './consultation-form-schema';
 
@@ -126,6 +127,7 @@ export function ConsultationForm({
 
     if (res?.status === 201) {
       const { id: leadId } = (await res.json()) as { id: string };
+      await rememberUserData(values.email, values.phone);
       const query = new URLSearchParams({ lead: leadId, case: values.caseType, from: location });
       router.push(`/${locale}/thank-you?${query}`);
       return;

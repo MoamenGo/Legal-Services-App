@@ -21,6 +21,7 @@ export function StickyCta({
         <a
           href={`tel:${site.phone}`}
           data-event="click_to_call"
+          data-location="sticky_bar"
           className="flex min-h-11 flex-1 items-center justify-center gap-1 rounded-lg border border-brand-900 text-sm font-medium text-brand-900"
         >
           <PhoneIcon />
@@ -31,6 +32,7 @@ export function StickyCta({
         <a
           href={waLink(site.whatsapp)}
           data-event="whatsapp_click"
+          data-location="sticky_bar"
           rel="noopener"
           className="flex min-h-11 flex-1 items-center justify-center gap-1 rounded-lg bg-[#1f8f4e] text-sm font-medium text-white"
         >

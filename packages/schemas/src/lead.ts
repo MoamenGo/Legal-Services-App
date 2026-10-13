@@ -16,6 +16,11 @@ export const leadSourceSchema = z.object({
   landingPage: z.string().trim().max(500).optional(),
   referrer: z.string().trim().max(500).optional(),
   device: z.enum(['mobile', 'tablet', 'desktop']).optional(),
+  // First touch, when it differs from the last (AGENTS.md section 8).
+  first_utm_source: utm,
+  first_utm_campaign: utm,
+  first_landingPage: z.string().trim().max(500).optional(),
+  first_referrer: z.string().trim().max(500).optional(),
 });
 
 /** Public lead form payload, shared by the web form and the API. */

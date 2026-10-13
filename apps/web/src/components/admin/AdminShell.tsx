@@ -16,6 +16,9 @@ export function AdminShell({ children }: { children: ReactNode }) {
       label: t('nav.leads'),
       active: pathname === '/admin' || pathname === '/admin/lead',
     },
+    ...(session && session.role !== 'lawyer'
+      ? [{ href: '/admin/reports', label: t('nav.reports'), active: pathname === '/admin/reports' }]
+      : []),
     ...(session?.role === 'admin'
       ? [{ href: '/admin/users', label: t('nav.users'), active: pathname === '/admin/users' }]
       : []),

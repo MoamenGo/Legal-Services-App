@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { ConsentSettingsButton } from './ConsentBanner';
 import { Link } from './LocalLink';
 import { Container } from './ui';
 
@@ -29,6 +30,7 @@ export async function SiteFooter({ minimal = false }: { minimal?: boolean }) {
           >
             {t('footer.terms')}
           </Link>
+          <ConsentSettingsButton label={t('consent.settings')} />
         </nav>
         <p>{t('footer.rights', { year: new Date().getFullYear(), firm })}</p>
         <p className="text-xs text-slate-500">{t('common.templateNotice')}</p>
