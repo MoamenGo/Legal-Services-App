@@ -5,5 +5,6 @@ export const plexArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic', 'latin'],
   weight: ['400', '500', '700'],
   display: 'swap',
+  preload: false,
   variable: '--font-plex-arabic',
 });

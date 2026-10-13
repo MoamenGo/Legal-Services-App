@@ -1,0 +1,40 @@
+name: Lighthouse
+
+# Checks the live site against the budgets in AGENTS.md section 7 after every deploy (mobile
+# emulation, 3 runs per page). Landing pages are noindex by design, so their SEO score is not
+# asserted; the 120 KB landing-page JS budget is a warning until it is revisited (docs/progress.md).
+on:
+  workflow_run:
+    workflows: [Deploy]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Read the site URL from wrangler.jsonc
+        id: site
+        run: echo "url=$(grep -oP '"NEXT_PUBLIC_SITE_URL":\s*"\K[^"]+' apps/web/wrangler.jsonc)" >> "$GITHUB_OUTPUT"
+      - name: Run Lighthouse CI
+        run: >-
+          npx --yes @lhci/cli@0.15.1 autorun
+          --collect.url=${{ steps.site.outputs.url }}/ar
+          --collect.url=${{ steps.site.outputs.url }}/en
+          --collect.url=${{ steps.site.outputs.url }}/ar/lp/labor-lawyer
+      - name: Upload the reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse
+          path: .lighthouseci
+          retention-days: 14

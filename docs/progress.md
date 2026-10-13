@@ -124,3 +124,18 @@ pnpm preview`, open `/ar/lp/labor-lawyer` at 360px and submit the form (needs in
   comparing pixel baselines, which differ between machines with fonts and anti-aliasing.
 - Verify: `cd apps/web && pnpm e2e:prepare && pnpm e2e` (needs internet for the captcha check;
   `PLAYWRIGHT_CHROMIUM_PATH` points at a system Chromium if Playwright's own is not installed).
+
+## 2026-10-13: Faster first paint and a Lighthouse check after each deploy
+
+- What: the cookie banner is now in the prerendered HTML and shown by CSS from the inline consent
+  script, instead of appearing after React loads; it was the largest element on first visits, so
+  LCP waited for all the JavaScript. Fonts are no longer preloaded (six files competed with the
+  page itself; `display: swap` keeps text visible). The language switch is a plain link, which
+  removes a failing prefetch of the other locale. A new `Lighthouse` workflow runs Lighthouse CI
+  (mobile, 3 runs) on `/ar`, `/en` and a landing page after every deploy and fails on the AGENTS.md
+  budgets.
+- Numbers: local mobile Lighthouse on `/ar` went from 87 to 85-95 and on the landing page from 92
+  to 92-98 (LCP 3.1-3.3 s to 1.9-2.7 s); this sandbox is noisy, so the live runs are the reference.
+  Landing-page JavaScript is about 155 KB compressed against the 120 KB budget, almost all of it
+  React and Next.js itself; the check reports it as a warning until the budget is revisited.
+- Verify: Actions → Lighthouse after a deploy, or run it by hand with **Run workflow**.
