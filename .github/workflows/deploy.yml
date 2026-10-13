@@ -26,6 +26,8 @@ jobs:
       # Repo variable (Settings > Secrets and variables > Actions > Variables). Empty keeps the
       # Turnstile test key, which accepts every visitor; set the firm's key before real traffic.
       NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
+      # Only whether the secrets exist; the values go to the one step that needs them.
+      HAS_ADMIN_SECRETS: ${{ secrets.ADMIN_EMAIL != '' && secrets.ADMIN_PASSWORD != '' }}
     steps:
       - name: Skip until Cloudflare secrets are set
         if: env.CLOUDFLARE_API_TOKEN == '' || env.CLOUDFLARE_ACCOUNT_ID == ''
@@ -45,7 +47,31 @@ jobs:
         if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
         working-directory: apps/web
         run: pnpm db:migrate:remote
+      - name: Create the first admin (only if ADMIN_EMAIL and ADMIN_PASSWORD secrets exist)
+        if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' && env.HAS_ADMIN_SECRETS == 'true'
+        working-directory: apps/web
+        env:
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          ADMIN_NAME: ${{ secrets.ADMIN_NAME }}
+        # Inserts nothing when that email already exists, so later password changes made in /admin stick.
+        run: |
+          pnpm -s admin:sql > "$RUNNER_TEMP/admin.sql"
+          npx wrangler d1 execute DB --remote --file "$RUNNER_TEMP/admin.sql"
+          rm "$RUNNER_TEMP/admin.sql"
       - name: Build and deploy the Worker
         if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
         working-directory: apps/web
         run: pnpm run deploy
+      - name: Create the sign-in secret if it is missing
+        if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
+        working-directory: apps/web
+        # A random value generated here and never printed. Rotating it signs everyone out, nothing more.
+        # A failed listing stops the step instead of being read as "missing", which would rotate it.
+        run: |
+          secrets=$(npx wrangler secret list --format json)
+          if echo "$secrets" | grep -q '"JWT_ACCESS_SECRET"'; then
+            echo "JWT_ACCESS_SECRET already set"
+          else
+            openssl rand -base64 48 | tr -d '\n' | npx wrangler secret put JWT_ACCESS_SECRET
+          fi

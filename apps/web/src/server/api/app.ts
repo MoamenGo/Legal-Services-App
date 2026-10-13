@@ -1,13 +1,12 @@
 import { Hono } from 'hono';
 import { apiError } from './errors';
+import type { ApiEnv } from './env';
+import { adminLeadsRoutes } from './modules/admin-leads/routes';
+import { authRoutes } from './modules/auth/routes';
 import { leadsRoutes } from './modules/leads/routes';
+import { usersRoutes } from './modules/users/routes';
 
-export type ApiEnv = {
-  Bindings: Pick<CloudflareEnv, 'DB' | 'LEAD_RATE_LIMITER'> & {
-    /** Secret set with `wrangler secret put`; absent while the template uses Turnstile test keys. */
-    TURNSTILE_SECRET_KEY?: string;
-  };
-};
+export type { ApiEnv } from './env';
 
 export const api = new Hono<ApiEnv>().basePath('/api');
 
@@ -22,6 +21,9 @@ api.get('/health', async (c) => {
 });
 
 api.route('/', leadsRoutes);
+api.route('/', authRoutes);
+api.route('/', adminLeadsRoutes);
+api.route('/', usersRoutes);
 
 api.notFound((c) => apiError(c, 404, 'not_found', 'Route not found'));
 

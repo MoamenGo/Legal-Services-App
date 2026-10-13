@@ -282,7 +282,7 @@ Each phase ends with a short summary in `/docs/progress.md` and requires human s
 - [ ] `config/env.ts` with zod; `.env.example`.
 - [x] Hono API at `/api`: error handler, `/api/health` (security headers via `next.config`). Rate limiting with the Workers rate-limit binding.
 - [ ] D1 + Drizzle: all tables + indexes (leads done) + seed script (`pnpm seed`) with **fake** data only.
-- [ ] Auth module + RBAC middleware + audit middleware.
+- [x] Auth module + RBAC middleware + audit middleware.
 - [ ] Next.js app with `next-intl`, RTL layout, fonts, header/footer.
 - [x] CI: lint, typecheck, test, build on every PR.
 
@@ -366,7 +366,7 @@ NEXT_PUBLIC_TURNSTILE_SITE_KEY
 LEAD_RETENTION_MONTHS=24
 
 # secrets
-JWT_ACCESS_SECRET, JWT_REFRESH_SECRET, TURNSTILE_SECRET_KEY, RESEND_API_KEY, MAIL_FROM,
+JWT_ACCESS_SECRET (refresh tokens are opaque, ADR 0003), TURNSTILE_SECRET_KEY, RESEND_API_KEY, MAIL_FROM,
 INTAKE_NOTIFY_EMAILS, WHATSAPP_TOKEN, WHATSAPP_PHONE_NUMBER_ID, SMS_PROVIDER, SMS_API_KEY,
 GA4_MEASUREMENT_ID, GA4_API_SECRET, GOOGLE_ADS_* (developer token, OAuth client, refresh token,
 customer id, conversion actions), REVALIDATE_SECRET, SENTRY_DSN

@@ -31,3 +31,19 @@ pnpm preview`, open `/ar/lp/labor-lawyer` at 360px and submit the form (needs in
   Turnstile).
 - Known gap: first-load JS is about 148 KB gzipped on pages with the form and 134 KB without
   (the Next.js + React baseline), above the 120 KB landing-page budget in AGENTS.md section 7.
+
+## 2026-10-13: Phase 3a admin sign-in and leads dashboard
+
+- What: `/api/auth/login|refresh|logout` with PBKDF2 passwords, 15-minute JWTs, rotating refresh
+  sessions and a 5-attempt lockout; RBAC (admin, intake, lawyer) and an audit log. Admin API for
+  leads (list with status, date, campaign and text filters; detail; status, assignee, value and
+  notes; CSV export) and users. The `/admin` dashboard in Arabic with an English toggle: login,
+  leads list (cards on mobile, table on desktop), lead detail, users. `pnpm seed` fills the local
+  database with fake data. The deploy workflow creates `JWT_ACCESS_SECRET` and, when the
+  `ADMIN_EMAIL`/`ADMIN_PASSWORD` secrets exist, the first admin. Decisions in ADR 0003.
+- Why: Phase 3 of the plan (AGENTS.md sections 4, 5 and 9).
+- Verify: `pnpm test` (the API tests run against a real local D1), then
+  `cd apps/web && pnpm db:migrate:local && pnpm seed && pnpm preview`, open `/admin`, sign in as
+  `admin@example.com` / `local-dev-password`, change a lead's status, and sign in as
+  `lawyer@example.com` to see only assigned leads.
+- Not yet: notifications and the Google Ads offline conversion job (Phase 3b), TOTP 2FA.

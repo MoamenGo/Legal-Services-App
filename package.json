@@ -12,7 +12,8 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "seed": "pnpm --filter @app/web seed"
   },
   "devDependencies": {
     "prettier": "^3.6.2",

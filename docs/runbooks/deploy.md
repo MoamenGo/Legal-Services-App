@@ -51,3 +51,20 @@ pnpm run deploy
 
 `npx wrangler rollback` returns to the previous Worker version. Migrations are additive so an older
 Worker keeps working against the newer schema.
+
+## Admin dashboard access
+
+The dashboard is at `/admin`. The deploy workflow creates the `JWT_ACCESS_SECRET` Worker secret on
+its own the first time. To create the first admin account:
+
+1. GitHub → Settings → Secrets and variables → Actions → **Secrets** → add `ADMIN_EMAIL` and
+   `ADMIN_PASSWORD` (at least 12 characters). Optionally add `ADMIN_NAME`.
+2. Re-run the Deploy workflow (Actions → Deploy → Run workflow) or merge any change.
+3. Sign in at `/admin/login`, then add the rest of the team in **Users**.
+
+The workflow only inserts the admin when no user has that email, so changing the secret later does
+not change the password. Change passwords in **Users** instead. After the first sign-in the two
+secrets can be deleted.
+
+Locally: `cd apps/web && pnpm db:migrate:local && pnpm seed`, then sign in as `admin@example.com`
+with `local-dev-password` (or the `SEED_PASSWORD` you set). `.dev.vars` needs `JWT_ACCESS_SECRET`.

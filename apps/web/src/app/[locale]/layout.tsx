@@ -1,19 +1,12 @@
 import type { Metadata } from 'next';
-import { IBM_Plex_Sans_Arabic } from 'next/font/google';
 import { getTranslations } from 'next-intl/server';
 import { JsonLd } from '@/components/JsonLd';
 import { site } from '@/content/site';
 import { directionOf, routing } from '@/i18n/routing';
 import { resolveLocale } from '@/lib/locale';
 import { absoluteUrl } from '@/lib/seo';
+import { plexArabic } from '../fonts';
 import '../globals.css';
-
-const plexArabic = IBM_Plex_Sans_Arabic({
-  subsets: ['arabic', 'latin'],
-  weight: ['400', '500', '700'],
-  display: 'swap',
-  variable: '--font-plex-arabic',
-});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

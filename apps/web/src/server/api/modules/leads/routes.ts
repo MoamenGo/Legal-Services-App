@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { site } from '@/content/site';
 import { turnstileSecret, verifyTurnstile } from '@/server/lib/turnstile';
 import { uuidv7 } from '@/server/lib/uuid';
-import type { ApiEnv } from '../../app';
+import type { ApiEnv } from '../../env';
 import { apiError } from '../../errors';
 import { createLead } from './service';
 

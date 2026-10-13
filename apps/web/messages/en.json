@@ -368,5 +368,123 @@
       "rateLimited": "Too many requests. Please wait a minute and try again.",
       "generic": "Something went wrong. Please try again or call us."
     }
+  },
+  "admin": {
+    "title": "Dashboard",
+    "nav": {
+      "leads": "Leads",
+      "users": "Users",
+      "logout": "Sign out",
+      "language": "العربية",
+      "skipToContent": "Skip to content"
+    },
+    "login": {
+      "heading": "Sign in",
+      "intro": "Consultation request dashboard for the firm team.",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "submitting": "Signing in…",
+      "invalid": "Wrong email or password.",
+      "locked": "This account is locked after several failed attempts. Try again in 15 minutes.",
+      "rateLimited": "Too many attempts. Wait a minute and try again.",
+      "notConfigured": "Sign-in is not enabled on this server yet."
+    },
+    "status": {
+      "new": "New",
+      "contacted": "Contacted",
+      "qualified": "Qualified",
+      "consultation_booked": "Consultation booked",
+      "retained": "Retained",
+      "lost": "Lost",
+      "spam": "Spam"
+    },
+    "roles": {
+      "admin": "Admin",
+      "lawyer": "Lawyer",
+      "intake": "Intake"
+    },
+    "leads": {
+      "heading": "Consultation requests",
+      "total": "{count} leads",
+      "search": "Search by name, phone or email",
+      "status": "Status",
+      "allStatuses": "All statuses",
+      "campaign": "Campaign",
+      "from": "From",
+      "to": "To",
+      "apply": "Apply",
+      "reset": "Clear",
+      "export": "Export CSV",
+      "empty": "No matching leads.",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {page} of {pages}",
+      "columns": {
+        "date": "Date",
+        "name": "Name",
+        "phone": "Phone",
+        "caseType": "Case type",
+        "status": "Status",
+        "campaign": "Campaign"
+      }
+    },
+    "lead": {
+      "back": "Back to leads",
+      "notFound": "This lead does not exist or you cannot view it.",
+      "contact": "Contact details",
+      "phone": "Phone",
+      "email": "Email",
+      "preferredContact": "Preferred contact",
+      "language": "Language",
+      "caseType": "Case type",
+      "message": "Message",
+      "createdAt": "Received",
+      "marketing": "Marketing consent",
+      "yes": "Yes",
+      "no": "No",
+      "source": "Traffic source",
+      "update": "Update lead",
+      "assignee": "Assigned to",
+      "unassigned": "Unassigned",
+      "value": "Estimated value (SAR)",
+      "note": "Add a note",
+      "notePlaceholder": "e.g. Called and booked a meeting",
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "Saved.",
+      "notes": "Notes",
+      "noNotes": "No notes yet.",
+      "call": "Call",
+      "whatsapp": "WhatsApp"
+    },
+    "users": {
+      "heading": "Users",
+      "add": "Add user",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "password": "Password",
+      "passwordHint": "At least 12 characters.",
+      "newPassword": "New password",
+      "active": "Active",
+      "inactive": "Disabled",
+      "lastLogin": "Last sign-in",
+      "never": "Never",
+      "create": "Create",
+      "created": "User added.",
+      "updated": "Updated.",
+      "emailTaken": "A user with this email already exists.",
+      "deactivate": "Disable",
+      "activate": "Enable",
+      "resetPassword": "Change password",
+      "cannotChangeSelf": "You cannot disable or demote your own account."
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again.",
+      "forbidden": "You do not have permission for this.",
+      "validation": "Please check the values you entered."
+    },
+    "loading": "Loading…"
   }
 }
