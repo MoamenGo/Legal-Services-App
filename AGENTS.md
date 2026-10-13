@@ -35,7 +35,7 @@
 | API | Hono, mounted at `/api` inside the Next app (`apps/web/src/server/api`) |
 | Database | Cloudflare D1 (SQLite) + Drizzle ORM; SQL migrations in `apps/web/migrations` |
 | Validation | zod (shared schemas in `packages/schemas`) |
-| Jobs/queue | Cloudflare Queues (consumer in the same Worker) + Cron Triggers |
+| Jobs/queue | D1 `jobs` outbox run via `waitUntil` + a Cron Trigger for retries (ADR 0004; Queues later if needed) |
 | Styling | Tailwind CSS with RTL support (logical properties: `ms-`, `me-`, `ps-`, `pe-`, `start`, `end`) |
 | i18n | `next-intl`, routes `/ar/...` (default) and `/en/...` |
 | Forms | react-hook-form + zod resolver |
@@ -356,7 +356,6 @@ never commit it). Keep `.dev.vars.example` in sync and rerun `pnpm typecheck` (i
 # bindings (wrangler.jsonc)
 DB                     D1 database
 MEDIA                  R2 bucket            (Phase 4)
-LEAD_JOBS              Queue producer       (lead pipeline)
 
 # vars
 NEXT_PUBLIC_SITE_URL

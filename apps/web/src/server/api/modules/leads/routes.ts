@@ -4,7 +4,8 @@ import { z } from 'zod';
 import { site } from '@/content/site';
 import { turnstileSecret, verifyTurnstile } from '@/server/lib/turnstile';
 import { uuidv7 } from '@/server/lib/uuid';
-import type { ApiEnv } from '../../env';
+import { enqueue, runJobs } from '@/server/jobs/outbox';
+import { inBackground, type ApiEnv } from '../../env';
 import { apiError } from '../../errors';
 import { createLead } from './service';
 
@@ -41,6 +42,22 @@ leadsRoutes.post('/leads', async (c) => {
   }
 
   const id = await createLead(c.env.DB, parsed.data);
-  // Phase 3 enqueues the intake notification, auto-reply and GA4 event here (LEAD_JOBS queue).
+  // Notifications never delay or fail the visitor's request (AGENTS.md section 6).
+  try {
+    const jobIds = await enqueue(
+      c.env.DB,
+      (['intake_email', 'intake_whatsapp', 'client_email', 'ga4_lead'] as const).map((type) => ({
+        type,
+        leadId: id,
+        dedupeKey: `${id}:${type}`,
+      })),
+    );
+    inBackground(c, () => runJobs(c.env, { ids: jobIds }));
+  } catch (error) {
+    console.error('lead_jobs_enqueue_failed', {
+      id,
+      error: error instanceof Error ? error.message : 'unknown',
+    });
+  }
   return c.json({ id }, 201);
 });

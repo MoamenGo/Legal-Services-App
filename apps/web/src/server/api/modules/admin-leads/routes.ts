@@ -2,7 +2,8 @@ import { Hono } from 'hono';
 import { z } from 'zod';
 import { leadStatuses } from '@/server/db/schema';
 import { audit, diffOf } from '../../audit';
-import type { ApiEnv } from '../../env';
+import { enqueue, runJobs } from '@/server/jobs/outbox';
+import { inBackground, type ApiEnv } from '../../env';
 import { apiError } from '../../errors';
 import { requireAuth, requireRole } from '../../middleware/auth';
 import { addNote, exportLeads, getLead, listLeads, toCsv, updateLead } from './service';
@@ -127,6 +128,7 @@ adminLeadsRoutes.patch('/admin/leads/:id', async (c) => {
   if (Object.keys(diff).length > 0) {
     await updateLead(c.env.DB, before.id, patch);
     await audit(c, 'lead.update', 'lead', before.id, diff);
+    await queueAdsConversion(c.env, before, patch.status, (work) => inBackground(c, work));
   }
   if (note) {
     await addNote(c.env.DB, before.id, user.id, note);
@@ -134,3 +136,26 @@ adminLeadsRoutes.patch('/admin/leads/:id', async (c) => {
   }
   return c.json({ lead: await getLead(c.env.DB, before.id, user) });
 });
+
+/** Offline conversion upload when a lead from an ad becomes qualified or retained (AGENTS.md section 6). */
+async function queueAdsConversion(
+  env: ApiEnv['Bindings'],
+  before: { id: string; status: string; source: unknown },
+  status: string | undefined,
+  background: (work: () => Promise<unknown>) => void,
+) {
+  if (!status || status === before.status || (status !== 'qualified' && status !== 'retained'))
+    return;
+  const source = (before.source ?? {}) as Record<string, string | undefined>;
+  if (!source.gclid && !source.gbraid && !source.wbraid) return;
+  const ids = await enqueue(env.DB, [
+    {
+      type: 'ads_conversion',
+      leadId: before.id,
+      payload: { action: status, at: new Date().toISOString() },
+      // Once per lead and stage, even if staff flip the status back and forth.
+      dedupeKey: `${before.id}:ads:${status}`,
+    },
+  ]);
+  if (ids.length > 0) background(() => runJobs(env, { ids }));
+}

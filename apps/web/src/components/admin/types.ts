@@ -55,6 +55,13 @@ export type LeadDetail = LeadRow & {
   marketingConsent: boolean;
   value: number | null;
   notes: { id: string; text: string; createdAt: string; by: string | null }[];
+  jobs: {
+    type: string;
+    status: 'pending' | 'done' | 'skipped' | 'failed';
+    attempts: number;
+    lastError: string | null;
+    updatedAt: string;
+  }[];
 };
 
 export type AdminUser = {

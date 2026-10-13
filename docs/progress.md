@@ -47,3 +47,18 @@ pnpm preview`, open `/ar/lp/labor-lawyer` at 360px and submit the form (needs in
   `admin@example.com` / `local-dev-password`, change a lead's status, and sign in as
   `lawyer@example.com` to see only assigned leads.
 - Not yet: notifications and the Google Ads offline conversion job (Phase 3b), TOTP 2FA.
+
+## 2026-10-13: Phase 3b lead notifications and Google Ads conversions
+
+- What: a D1 `jobs` outbox (ADR 0004). Each new lead queues a staff email, a staff WhatsApp
+  template message, a client auto-reply email and a GA4 Measurement Protocol `generate_lead`.
+  Setting a lead from an ad to qualified or retained queues one Google Ads offline conversion
+  upload per stage and records the result on the lead. Jobs run right after the response and a
+  10-minute cron retries failures (1 min, 5 min, 30 min, 2 h, then failed). Every integration is
+  optional and skipped until configured. The lead page in `/admin` shows each job's state.
+  `worker.ts` is now the Worker entry, wrapping OpenNext and adding the cron handler.
+- Why: AGENTS.md section 6, on the free plan without Cloudflare Queues.
+- Verify: `pnpm test` (runner, backoff, double-run guard and each handler against a local D1), then
+  `cd apps/web && pnpm build:worker && npx wrangler dev --test-scheduled` and open
+  `/__scheduled?cron=*/10+*+*+*+*`. Setup per channel: `docs/runbooks/integrations.md`.
+- Not yet: SMS (needs the firm to pick Unifonic or Taqnyat), Sentry alerting.

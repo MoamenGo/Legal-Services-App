@@ -203,6 +203,25 @@ export function LeadScreen() {
             )}
           </section>
 
+          {lead.jobs.length > 0 && (
+            <section className={cardClass}>
+              <h2 className="font-bold text-brand-900">{t('lead.jobs')}</h2>
+              <ul className="mt-3 divide-y divide-slate-100 text-sm">
+                {lead.jobs.map((job) => (
+                  <li
+                    key={`${job.type}-${job.updatedAt}`}
+                    className="flex flex-wrap items-center justify-between gap-2 py-2"
+                  >
+                    <span>{t(`jobs.${job.type}`)}</span>
+                    <span className={jobColor[job.status]} title={job.lastError ?? undefined}>
+                      {t(`jobs.status.${job.status}`)}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           {sources.length > 0 && (
             <section className={cardClass}>
               <h2 className="font-bold text-brand-900">{t('lead.source')}</h2>
@@ -306,6 +325,13 @@ export function LeadScreen() {
     </div>
   );
 }
+
+const jobColor = {
+  pending: 'text-amber-700',
+  done: 'text-emerald-700',
+  skipped: 'text-slate-500',
+  failed: 'text-rose-700',
+} as const;
 
 function Field({ term, children }: { term: string; children: React.ReactNode }) {
   return (

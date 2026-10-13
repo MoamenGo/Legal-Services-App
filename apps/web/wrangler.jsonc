@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "legal-services-app",
-  "main": ".open-next/worker.js",
+  "main": "worker.ts",
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
@@ -9,9 +9,12 @@
     "binding": "ASSETS",
   },
   "observability": { "enabled": true },
+  // Retries pending notification and conversion jobs (ADR 0004).
+  "triggers": { "crons": ["*/10 * * * *"] },
   "vars": {
     "NEXT_PUBLIC_SITE_URL": "https://legal-services-app.abdelmoamengomaa98.workers.dev",
     "NEXT_PUBLIC_DEFAULT_LOCALE": "ar",
+    "INTAKE_LANGUAGE": "ar",
   },
   // POST /api/leads: 5 requests a minute per IP (AGENTS.md section 5).
   "ratelimits": [

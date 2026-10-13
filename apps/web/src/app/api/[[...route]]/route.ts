@@ -1,7 +1,11 @@
 import { getCloudflareContext } from '@opennextjs/cloudflare';
 import { api } from '@/server/api/app';
 
-const handler = async (request: Request) => api.fetch(request, getCloudflareContext().env);
+const handler = async (request: Request) => {
+  const { env, ctx } = getCloudflareContext();
+  // ctx lets the API finish background jobs after the response (waitUntil).
+  return api.fetch(request, env, ctx);
+};
 
 export const GET = handler;
 export const POST = handler;
