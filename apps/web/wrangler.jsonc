@@ -9,12 +9,14 @@
     "binding": "ASSETS",
   },
   "observability": { "enabled": true },
-  // Retries pending notification and conversion jobs (ADR 0004).
-  "triggers": { "crons": ["*/10 * * * *"] },
+  // Every 10 minutes: retry pending notification and conversion jobs (ADR 0004).
+  // Daily at 00:00 UTC (03:00 Riyadh): anonymize leads past LEAD_RETENTION_MONTHS (ADR 0006).
+  "triggers": { "crons": ["*/10 * * * *", "0 0 * * *"] },
   "vars": {
     "NEXT_PUBLIC_SITE_URL": "https://legal-services-app.abdelmoamengomaa98.workers.dev",
     "NEXT_PUBLIC_DEFAULT_LOCALE": "ar",
     "INTAKE_LANGUAGE": "ar",
+    "LEAD_RETENTION_MONTHS": "24",
     // Repository the admin "Publish changes" button rebuilds (needs the GITHUB_DEPLOY_TOKEN secret).
     "GITHUB_REPOSITORY": "MoamenGo/Legal-Services-App",
   },

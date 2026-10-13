@@ -37,6 +37,8 @@ export const leads = sqliteTable(
       .$type<{ action: string; at: string; ok: boolean; error?: string }[]>()
       .notNull()
       .default(sql`'[]'`),
+    /** Set when the retention job strips PII (AGENTS.md section 9, ADR 0006). */
+    anonymizedAt: integer('anonymized_at', { mode: 'timestamp' }),
     createdAt: integer('created_at', { mode: 'timestamp' })
       .notNull()
       .default(sql`(unixepoch())`),

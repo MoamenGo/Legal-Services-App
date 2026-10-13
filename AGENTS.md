@@ -217,7 +217,7 @@ Every admin read of a lead and every write must create an `AuditLog` entry.
 
 ## 9. Security & privacy (non-negotiable)
 
-- `helmet` with a strict CSP (allow GTM/GA/Ads domains explicitly), HSTS, `X-Content-Type-Options`, `Referrer-Policy: strict-origin-when-cross-origin`.
+- Security headers on every response (`apps/web/src/lib/security-headers.ts` via `next.config`; `helmet` does not apply to Workers): a strict CSP (allow GTM/GA/Ads domains explicitly), HSTS, `X-Content-Type-Options`, `Referrer-Policy: strict-origin-when-cross-origin`.
 - CORS: allow only the configured web origins.
 - Rate limiting on all public endpoints; stricter on `/auth/*` and `/leads`.
 - Captcha: Cloudflare Turnstile (preferred) or reCAPTCHA v3, verified server-side.
@@ -306,11 +306,11 @@ Each phase ends with a short summary in `/docs/progress.md` and requires human s
 
 ### Phase 6: Migration, QA, launch prep
 - [ ] Content migration scripts (idempotent) from the old site.
-- [ ] Implement redirects from `/docs/redirect-map.csv` in `next.config` / middleware.
+- [x] Implement redirects from `/docs/redirect-map.csv` in `next.config` / middleware.
 - [ ] Full Playwright suite green; Lighthouse CI budgets met.
 - [ ] Security check: `pnpm audit`, OWASP ZAP baseline against staging, header check.
-- [ ] Write `/docs/runbooks/deploy.md`, `/docs/runbooks/rollback.md`, `/docs/runbooks/backup-restore.md`.
-- [ ] Write `/docs/admin-guide-ar.md`, an Arabic guide for firm staff on using the dashboard.
+- [x] Write `/docs/runbooks/deploy.md`, `/docs/runbooks/rollback.md`, `/docs/runbooks/backup-restore.md`.
+- [x] Write `/docs/admin-guide-ar.md`, an Arabic guide for firm staff on using the dashboard.
 
 ### Phase 7: Post-launch (only when asked)
 - [ ] A/B testing via `abVariant` on landing pages.

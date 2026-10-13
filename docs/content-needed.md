@@ -1,21 +1,22 @@
 # Content needed from the firm
 
 Everything the site shows as `[CLIENT TO PROVIDE]`. Nothing here may be invented (AGENTS.md rule 4).
-Text lives in `apps/web/messages/ar.json` and `en.json`; contact numbers in
-`apps/web/src/content/site.ts` until the admin Settings screen exists (Phase 4).
+Text lives in `apps/web/messages/ar.json` and `en.json`. Contact details, address and hours are
+entered by an admin in **/admin → Settings** and go live with **Publish changes** (ADR 0005).
 
 ## Firm identity
 
 - [ ] Firm name in Arabic and English (`common.firmName`)
-- [ ] Logo (SVG preferred) and brand colours, if different from the template's navy and gold
-- [ ] Office address in Riyadh (`footer.address`) and office hours (`contact.hoursValue`)
+- [ ] Logo (SVG preferred) and brand colours, if different from the template's navy and gold; the
+      browser-tab icon `apps/web/src/app/icon.svg` is a generic placeholder (scales of justice)
 - [ ] Saudi Bar licence number(s) shown in the footer and trust block
 
-## Contact (`src/content/site.ts`)
+## Contact (/admin → Settings)
 
-- [ ] Phone number for click-to-call (`site.phone`, E.164 such as +9665XXXXXXXX)
-- [ ] WhatsApp Business number (`site.whatsapp`)
-- [ ] Public email (`site.email`) and the email for privacy requests (privacy policy)
+- [ ] Phone number for click-to-call (Saudi mobile or landline)
+- [ ] WhatsApp Business number
+- [ ] Public email, and the email for privacy requests (privacy policy text)
+- [ ] Address and office hours in Arabic and English
 
 ## Trust block (real numbers only)
 
@@ -38,6 +39,11 @@ Text lives in `apps/web/messages/ar.json` and `en.json`; contact numbers in
 
 - [ ] Ad groups and keywords, so each landing page headline mirrors its keyword
       (`src/content/landing-pages.ts` and `landing.pages.<slug>`)
+
+## Old website
+
+- [ ] Address of the current site, so its URLs can be listed in `docs/redirect-map.csv`
+      (each old page gets a 301 to its new page; see `docs/runbooks/launch-checklist.md`)
 
 ## Legal pages
 

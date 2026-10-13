@@ -197,7 +197,9 @@ export function LeadsScreen() {
                   className="block rounded-xl border border-slate-200 bg-white p-4 hover:border-brand-700"
                 >
                   <div className="flex items-start justify-between gap-2">
-                    <span className="font-medium text-brand-900">{lead.name}</span>
+                    <span className="font-medium text-brand-900">
+                      {lead.name || t('lead.anonymized')}
+                    </span>
                     <StatusBadge status={lead.status} />
                   </div>
                   <p className="mt-1 text-sm text-slate-600" dir="ltr">
@@ -234,7 +236,7 @@ export function LeadsScreen() {
                         href={`/admin/lead?id=${lead.id}`}
                         className="font-medium text-brand-900 underline-offset-2 hover:underline"
                       >
-                        {lead.name}
+                        {lead.name || t('lead.anonymized')}
                       </Link>
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap" dir="ltr">

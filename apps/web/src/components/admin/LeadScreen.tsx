@@ -77,6 +77,15 @@ export function LeadScreen() {
     );
   }
 
+  async function onAnonymize() {
+    if (!lead || !window.confirm(t('lead.confirmAnonymize'))) return;
+    const result = await api<{ lead: LeadDetail }>(`/api/admin/leads/${lead.id}/anonymize`, {
+      method: 'POST',
+    });
+    if (result.ok) setLead(result.data.lead);
+    else setNotice({ ok: false, key: 'errors.generic' });
+  }
+
   async function onSave(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!lead) return;
@@ -137,7 +146,7 @@ export function LeadScreen() {
       </Link>
 
       <div className="flex flex-wrap items-center gap-3">
-        <h1 className="text-2xl font-bold text-brand-900">{lead.name}</h1>
+        <h1 className="text-2xl font-bold text-brand-900">{lead.name || t('lead.anonymized')}</h1>
         <StatusBadge status={lead.status} />
       </div>
 
@@ -147,7 +156,7 @@ export function LeadScreen() {
             <h2 className="font-bold text-brand-900">{t('lead.contact')}</h2>
             <dl className="mt-3 grid gap-x-6 gap-y-3 sm:grid-cols-2">
               <Field term={t('lead.phone')}>
-                <span dir="ltr">{lead.phone}</span>
+                {lead.phone ? <span dir="ltr">{lead.phone}</span> : '—'}
               </Field>
               <Field term={t('lead.email')}>
                 {lead.email ? <span dir="ltr">{lead.email}</span> : '—'}
@@ -164,19 +173,21 @@ export function LeadScreen() {
                 {lead.marketingConsent ? t('lead.yes') : t('lead.no')}
               </Field>
             </dl>
-            <div className="mt-4 flex flex-wrap gap-2">
-              <a href={`tel:${lead.phone}`} className={secondaryButton}>
-                {t('lead.call')}
-              </a>
-              <a
-                href={`https://wa.me/${digits}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={secondaryButton}
-              >
-                {t('lead.whatsapp')}
-              </a>
-            </div>
+            {lead.phone && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                <a href={`tel:${lead.phone}`} className={secondaryButton}>
+                  {t('lead.call')}
+                </a>
+                <a
+                  href={`https://wa.me/${digits}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={secondaryButton}
+                >
+                  {t('lead.whatsapp')}
+                </a>
+              </div>
+            )}
             {lead.message && (
               <div className="mt-4">
                 <h3 className="text-sm font-medium text-slate-600">{t('lead.message')}</h3>
@@ -234,6 +245,20 @@ export function LeadScreen() {
                   </Field>
                 ))}
               </dl>
+            </section>
+          )}
+
+          {session?.role === 'admin' && !lead.anonymizedAt && (
+            <section className={cardClass}>
+              <h2 className="font-bold text-brand-900">{t('lead.privacy')}</h2>
+              <p className="mt-2 text-sm text-slate-600">{t('lead.anonymizeHelp')}</p>
+              <button
+                type="button"
+                onClick={() => void onAnonymize()}
+                className={`mt-3 ${secondaryButton} text-rose-800`}
+              >
+                {t('lead.anonymize')}
+              </button>
             </section>
           )}
         </div>

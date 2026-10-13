@@ -94,3 +94,17 @@ pnpm preview`, open `/ar/lp/labor-lawyer` at 360px and submit the form (needs in
   open `/ar/articles/sample-article` and `/ar/contact`, and edit both in `/admin`.
 - Not yet: editing services and landing pages in the dashboard (they stay in code), media uploads
   (R2 needs a card on file).
+
+## 2026-10-13: Phase 6 launch prep (retention, security headers, redirects, runbooks)
+
+- What: a daily cron anonymizes leads older than `LEAD_RETENTION_MONTHS` (24) and clears old
+  sessions; admins can delete a client's personal data on request from the lead page
+  (`POST /api/admin/leads/:id/anonymize`, audited). Every response carries a CSP that allows only
+  GTM, GA4, Google Ads and Turnstile, plus HSTS, nosniff, Referrer-Policy, COOP and
+  Permissions-Policy. Old-site URLs in `docs/redirect-map.csv` become 301 redirects at build time.
+  Runbooks for rollback, backup/restore and launch, and the Arabic staff guide
+  `docs/admin-guide-ar.md`. Placeholder browser-tab icon.
+- Why: AGENTS.md section 9 and Phase 6; ADR 0006 records the retention and CSP choices.
+- Verify: `pnpm test` (retention, anonymize route, redirect map, headers), then
+  `cd apps/web && pnpm db:migrate:local && pnpm preview` and `curl -I http://localhost:8787/ar`.
+  Pages, the lead form and `/admin` load with no CSP errors in the browser console.
