@@ -47,10 +47,11 @@ pnpm db:migrate:remote
 pnpm run deploy
 ```
 
-## Rollback
+## Rollback, backups and launch
 
-`npx wrangler rollback` returns to the previous Worker version. Migrations are additive so an older
-Worker keeps working against the newer schema.
+- Rolling back a bad deploy: `docs/runbooks/rollback.md`.
+- Database backups and restores: `docs/runbooks/backup-restore.md`.
+- Before real ad traffic: `docs/runbooks/launch-checklist.md`.
 
 ## Admin dashboard access
 

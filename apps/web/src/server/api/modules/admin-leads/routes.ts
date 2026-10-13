@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { leadStatuses } from '@/server/db/schema';
 import { audit, diffOf } from '../../audit';
 import { enqueue, runJobs } from '@/server/jobs/outbox';
+import { anonymizeLead } from '@/server/jobs/retention';
 import { inBackground, type ApiEnv } from '../../env';
 import { apiError } from '../../errors';
 import { requireAuth, requireRole } from '../../middleware/auth';
@@ -135,6 +136,14 @@ adminLeadsRoutes.patch('/admin/leads/:id', async (c) => {
     await audit(c, 'lead.note', 'lead', before.id);
   }
   return c.json({ lead: await getLead(c.env.DB, before.id, user) });
+});
+
+// A client's PDPL deletion request. Admin only: it cannot be undone.
+adminLeadsRoutes.post('/admin/leads/:id/anonymize', requireRole('admin'), async (c) => {
+  const id = c.req.param('id');
+  if (!(await anonymizeLead(c.env.DB, id))) return apiError(c, 404, 'not_found', 'Lead not found');
+  await audit(c, 'lead.anonymize', 'lead', id);
+  return c.json({ lead: await getLead(c.env.DB, id, c.get('user')) });
 });
 
 /** Offline conversion upload when a lead from an ad becomes qualified or retained (AGENTS.md section 6). */

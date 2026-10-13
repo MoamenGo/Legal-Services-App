@@ -1,0 +1,1 @@
+ALTER TABLE `leads` ADD `anonymized_at` integer;

@@ -471,7 +471,12 @@
       "noNotes": "No notes yet.",
       "call": "Call",
       "whatsapp": "WhatsApp",
-      "jobs": "Notifications and conversions"
+      "jobs": "Notifications and conversions",
+      "anonymized": "Personal data deleted",
+      "privacy": "Delete personal data",
+      "anonymizeHelp": "When a client asks for their data to be deleted (PDPL): name, phone, email, message and notes are removed; case type, status and campaign stay for reports. This cannot be undone.",
+      "anonymize": "Delete personal data",
+      "confirmAnonymize": "Permanently delete this client’s personal data? This cannot be undone."
     },
     "users": {
       "heading": "Users",

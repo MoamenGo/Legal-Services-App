@@ -164,3 +164,38 @@ describe('toCsv', () => {
     expect(toCsv([['a,b', 'say "hi"', null, '-1', 7]])).toBe('﻿"a,b","say ""hi""","","\'-1","7"');
   });
 });
+
+describe('POST /api/admin/leads/:id/anonymize', () => {
+  const anonymize = async (id: string, role: keyof typeof ids) =>
+    api.request(
+      `/api/admin/leads/${id}/anonymize`,
+      {
+        method: 'POST',
+        headers: await bearer(ids[role], role === 'otherLawyer' ? 'lawyer' : role),
+      },
+      testEnv(ctx.db),
+    );
+
+  it('is admin only', async () => {
+    expect((await anonymize(leadIds.mine, 'intake')).status).toBe(403);
+    expect((await anonymize(leadIds.mine, 'lawyer')).status).toBe(403);
+  });
+
+  it('clears the PII of one lead and logs it', async () => {
+    const id = await insertLead(ctx.db, { name: 'طلب حذف', gclid: 'TEST-gclid-del' });
+    const res = await anonymize(id, 'admin');
+    expect(res.status).toBe(200);
+    const { lead } = (await res.json()) as {
+      lead: { name: string; phone: string; source: Record<string, string>; anonymizedAt: string };
+    };
+    expect(lead).toMatchObject({ name: '', phone: '' });
+    expect(lead.source.gclid).toBeUndefined();
+    expect(lead.anonymizedAt).toBeTruthy();
+    const row = await ctx.db
+      .prepare("select user_id from audit_log where action = 'lead.anonymize' and entity_id = ?")
+      .bind(id)
+      .first<{ user_id: string }>();
+    expect(row?.user_id).toBe(ids.admin);
+    expect((await anonymize('missing', 'admin')).status).toBe(404);
+  });
+});

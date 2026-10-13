@@ -1,0 +1,4 @@
+# 301 redirects from the firm's old site to this one (AGENTS.md section 7). One row per old URL.
+# from: old path, starting with "/" (no domain, no query string). to: new path or full URL.
+# Fill this from the Phase 1 crawl of the old site before switching DNS; rebuild to apply.
+from,to

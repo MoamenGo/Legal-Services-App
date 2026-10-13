@@ -50,6 +50,7 @@ export type LeadRow = {
 
 export type LeadDetail = LeadRow & {
   email: string | null;
+  anonymizedAt: string | null;
   message: string | null;
   preferredContact: string;
   marketingConsent: boolean;
